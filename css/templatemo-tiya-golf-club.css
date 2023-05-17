@@ -444,8 +444,8 @@ strong {
 .navbar {
   background: transparent;
   z-index: 99;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  /* padding-top: 15px;
+  padding-bottom: 15px; */
 }
 
 .navbar-brand,
@@ -643,7 +643,7 @@ strong {
   HERO        
 -----------------------------------------*/
 .hero-section {
-  background-image: url('../images/anna-rosar-ZxFyVBHMK-c-unsplash.jpg');
+  background-image: url('../images/background1.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -1121,7 +1121,7 @@ strong {
   width: 24px;
   position: absolute;
   top: 0;
-  margin: 12px;
+  margin: 8px;
   margin-left: 15px;
 }
 
@@ -1202,9 +1202,9 @@ strong {
     left: 10px;
     opacity: 1;
     pointer-events: auto;
-    max-width: 155px;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    max-width: 100px;
+    /* margin-top: 15px;
+    margin-bottom: 15px; */
   }
 
   .navbar-expand-lg .navbar-nav {

@@ -8,7 +8,8 @@
         <meta name="author" content="">
 
         <title>Skin Quality Analysis - Good Vibes Mood</title>
-        <link rel="icon" href="..\images\logo.jpg">
+      
+        <link rel="shortcut icon" href="images/logo.jpg" type="image/x-icon">
 
         <!-- CSS FILES -->                
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -108,11 +109,11 @@
             <!-- End Home -->
 
             <!-- START ABOUT -->
-            <section class="about-section section-padding" id="section_2">
+            <section class="about-section section-padding" >
                 <div class="container">
                     <div class="row">
 
-                        <div class="col-lg-12 col-12 text-center mb-4">
+                        <div class="col-lg-12 col-12 text-center mb-4" id="section_2">
                             <h2 class="mb-lg-5 mb-4">About GVM</h2>
                             
                             <div class="text-wrap">
@@ -284,154 +285,35 @@
                     <div class="row">
 
                         <div class="col-lg-12 col-12 text-center mx-auto mb-lg-5 mb-4">
-                            <h2><span>Membership</span> at Tiya</h2>
+                            <h2><span>Scincare</span> Recommendation</h2>
                         </div>
 
                         <div class="col-lg-6 col-12 mb-3 mb-lg-0">
-                            <h4 class="mb-4 pb-lg-2">Membership Fees</h4>
+                            <h4 class="mb-4 pb-lg-2">Face Detection</h4>
 
-                            <div class="table-responsive">
-                                <table class="table text-center">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 34%;">Yearly Access</th>
-                                            
-                                            <th style="width: 22%;">T1 $420</th>
-                                            
-                                            <th style="width: 22%;">T2 $640</th>
-                                            
-                                            <th style="width: 22%;">T3 $860</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row" class="text-start">Golf Insurance</th>
-                                            
-                                            <td>
-                                                <i class="bi-check-circle-fill"></i>
-                                            </td>
-                                            
-                                            <td>
-                                                <i class="bi-check-circle-fill"></i>
-                                            </td>
-                                            
-                                            <td>
-                                                <i class="bi-check-circle-fill"></i>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <th scope="row" class="text-start">Club Facilities</th>
-
-                                            <td>
-                                                <i class="bi-check-circle-fill"></i>
-                                            </td>
-
-                                            <td>
-                                                <i class="bi-check-circle-fill"></i>
-                                            </td>
-
-                                            <td>
-                                                <i class="bi-check-circle-fill"></i>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <th scope="row" class="text-start">Country Club</th>
-
-                                            <td>
-                                                <i class="bi-x-circle-fill"></i>
-                                            </td>
-
-                                            <td>
-                                                <i class="bi-check-circle-fill"></i>
-                                            </td>
-
-                                            <td>
-                                                <i class="bi-check-circle-fill"></i>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <th scope="row" class="text-start">Weekend Seasonal</th>
-
-                                            <td>
-                                                <i class="bi-x-circle-fill"></i>
-                                            </td>
-
-                                            <td>
-                                                <i class="bi-check-circle-fill"></i>
-                                            </td>
-
-                                            <td>
-                                                <i class="bi-check-circle-fill"></i>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <th scope="row" class="text-start">Premium Courses</th>
-
-                                            <td>
-                                                <i class="bi-x-circle-fill"></i>
-                                            </td>
-
-                                            <td>
-                                                <i class="bi-x-circle-fill"></i>
-                                            </td>
-
-                                            <td>
-                                                <i class="bi-check-circle-fill"></i>
-                                            </td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <th scope="row" class="text-start">Pro's Networking</th>
-
-                                            <td>
-                                                <i class="bi-x-circle-fill"></i>
-                                            </td>
-
-                                            <td>
-                                                <i class="bi-x-circle-fill"></i>
-                                            </td>
-
-                                            <td>
-                                                <i class="bi-check-circle-fill"></i>
-                                            </td>
-                                        </tr>
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
+                            <form>
+                                <div class="mb-3">
+                                  <label for="inputImage" class="form-label">Upload Gambar</label>
+                                  <div>
+                                    <img src="images/face_example.jpg" alt="Contoh Foto" style="max-width: 5cm;   border-radius: 10px;">
+                                    <p>Coba aplikasi untuk mengetahui produk scincare mana yang cocok untuk anda</p>
+                                  </div>
+                                  <input type="file" class="form-control" id="inputImage" accept="image/*">
+                                </div>
+                                <div class="text-center">
+                                  <button type="button" class="btn btn-primary" onclick="processImage()">Proses</button>
+                                </div>
+                              </form>
                         </div>
 
                         <div class="col-lg-5 col-12 mx-auto">
-                        <h4 class="mb-4 pb-lg-2">Please join us!</h4>
-                            <form action="#" method="post" class="custom-form membership-form shadow-lg" role="form">
-                                <h4 class="text-white mb-4">Become a member</h4>
-
-                                    <div class="form-floating">
-                                        <input type="text" name="full-name" id="full-name" class="form-control" placeholder="Full Name" required="">
-                                        
-                                        <label for="floatingInput">Full Name</label>
-                                    </div>
-
-                                    <div class="form-floating">
-                                        <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Email address" required="">
-                                        
-                                        <label for="floatingInput">Email address</label>
-                                    </div>
-
-                                    <div class="form-floating">
-                                        <textarea class="form-control" id="message" name="message" placeholder="Describe message here"></textarea>
-                                        
-                                        <label for="floatingTextarea"> Comments</label>
-                                    </div>
-
-                                    <button type="submit" class="form-control">Submit</button>
-                                </div>
-                            </form>
+                        <h4 class="mb-4 pb-lg-2">Recommendation Produck</h4>
+                        <div id="outputArea">
+                            <div class="box">
+                              <img src="https://dummyimage.com/300x300/000/fff" alt="Gambar Produk">
+                              <p>Nama Produk</p>
+                            </div>
+                          </div>
                         </div>
 
                     </div>

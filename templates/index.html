@@ -126,152 +126,31 @@
                         </div>
 
                         <!-- START GAMBAR MEMBER -->
-
-                        <!-- CLARA -->
+                        {%for member in imagesMember%}
                         <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0 mb-md-0">
                             <div class="member-block">
                                 <div class="member-block-image-wrap" style="height: 18rem;"> 
-                                    <img src="../static/images/members/clara.jpg"  class="member-block-image img-fluid" alt="">
+                                    <img src="{{ url_for('static', filename='images/members/' + member) }}"  class="member-block-image img-fluid" alt="">
 
                                     <ul class="social-icon">
                                         <li class="social-icon-item">
-                                            <a href="https://www.linkedin.com/in/claraadrianasidauruk/" class="social-icon-link bi-linkedin" target="_blank"></a>
+                                            <a href="{{memberData[loop.index0].linkedin}}" class="social-icon-link bi-linkedin" target="_blank"></a>
                                         </li>
 
                                         <li class="social-icon-item">
-                                            <a href="https://github.com/Claraa24" target="_blank" class="social-icon-link bi-github"></a>
+                                            <a href="{{memberData[loop.index0].github}}" target="_blank" class="social-icon-link bi-github"></a>
                                         </li>
                                     </ul>
                                 </div>
 
                                 <div class="member-block-info d-flex align-items-center">
-                                    <h4>Clara Adriana</h4>
+                                    <h4>{{memberData[loop.index0].name}}</h4>
 
-                                    <p class="ms-auto">Co-Detection</p>
+                                    <p class="ms-auto">{{memberData[loop.index0].position}}</p>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- JOEL -->
-                        <div class="col-lg-4 col-md-6 col-12">
-                            <div class="member-block">
-                                <div class="member-block-image-wrap" style="height: 18rem;"> 
-                                    <img src="../static/images/members/joel.jpg"  class="member-block-image img-fluid" alt="">
-
-                                    <ul class="social-icon">
-                                        <li class="social-icon-item">
-                                            <a href="https://www.linkedin.com/in/joelbinsar/" class="social-icon-link bi-linkedin" target="_blank"></a>
-                                        </li>
-                                        <li class="social-icon-item">
-                                            <a href="https://github.com/bijoaja" target="_blank" class="social-icon-link bi-github"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="member-block-info d-flex align-items-center">
-                                    <h4>Joel Binsar</h4>
-
-                                    <p class="ms-auto">Team Leader</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- PUJA -->
-                        <div class="col-lg-4 col-md-6 col-12">
-                            <div class="member-block">
-                                <div class="member-block-image-wrap" style="height: 18rem;"> 
-                                    <img src="../static/images/members/puja1.jpg"  class="member-block-image img-fluid" alt="">
-
-                                    <ul class="social-icon">
-                                        <li class="social-icon-item">
-                                            <a href="https://www.linkedin.com/in/puja-ningsih-088781268/" class="social-icon-link bi-linkedin" target="_blank"></a>
-                                        </li>
-                                        <li class="social-icon-item">
-                                            <a href="https://github.com/Pujaningsih39" target="_blank" class="social-icon-link bi-github"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="member-block-info d-flex align-items-center">
-                                    <h4>Pujaningsih</h4>
-
-                                    <p class="ms-auto">Co-Detection</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- PUTRI -->
-                        <div class="col-lg-4 col-md-6 col-12">
-                            <div class="member-block">
-                                <div class="member-block-image-wrap" style="height: 18rem;"> 
-                                    <img src="../static/images/members/putri.jpg"  class="member-block-image img-fluid" alt="">
-
-                                    <ul class="social-icon">
-                                        <li class="social-icon-item">
-                                            <a href="https://www.linkedin.com/in/putri-wulandari-148a1b23b/" target="_blank" class="social-icon-link bi-linkedin"></a>
-                                        </li>
-                                        <li class="social-icon-item">
-                                            <a href="https://github.com/putriwulan05" target="_blank" class="social-icon-link bi-github"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="member-block-info d-flex align-items-center">
-                                    <h4>Putri Wulandari</h4>
-
-                                    <p class="ms-auto">Co-Recommendation</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- WISNU -->
-                        <div class="col-lg-4 col-md-6 col-12">
-                            <div class="member-block">
-                                <div class="member-block-image-wrap" style="height: 18rem;"> 
-                                    <img src="../static/images/members/wisnu.jpg"  class="member-block-image img-fluid" alt="">
-
-                                    <ul class="social-icon">
-                                        <li class="social-icon-item">
-                                            <a href="https://www.linkedin.com/in/wisnuwiz/" target="_blank" class="social-icon-link bi-linkedin"></a>
-                                        </li>
-                                        <li class="social-icon-item">
-                                            <a href="https://github.com/Wisnuoke34" target="_blank" class="social-icon-link bi-github"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="member-block-info d-flex align-items-center">
-                                    <h4>Wisnu Wijaya</h4>
-
-                                    <p class="ms-auto">Front-End</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- RITA -->
-                        <div class="col-lg-4 col-md-6 col-12">
-                            <div class="member-block">
-                                <div class="member-block-image-wrap" style="height: 18rem;"> 
-                                    <img src="../static/images/members/rita.jpg"  class="member-block-image img-fluid" alt="">
-
-                                    <ul class="social-icon">
-                                        <li class="social-icon-item">
-                                            <a href="https://www.linkedin.com/in/ritadwipangesti" target="_blank" class="social-icon-link bi-linkedin"></a>
-                                        </li>
-                                        <li class="social-icon-item">
-                                            <a href="https://github.com/ritapangesti" target="_blank" class="social-icon-link bi-github"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="member-block-info d-flex align-items-center">
-                                    <h4>Rita Dwi Pangesti</h4>
-
-                                    <p class="ms-auto">Co-Recommendation</p>
-                                </div>
-                            </div>
-                        </div>
-                        
+                        {% endfor %}                      
                         <!-- END GAMBAR MEMBER -->
 
                     </div>
@@ -291,7 +170,7 @@
                         <div class="col-lg-6 col-12 mb-3 mb-lg-0">
                             <h4 class="mb-4 pb-lg-2">Face Detection</h4>
 
-                            <form>
+                            <form method="POST" enctype="multipart/form-data">
                                 <div class="mb-3">
                                   <label for="inputImage" class="form-label">Upload Gambar</label>
                                   <div>
@@ -301,7 +180,7 @@
                                   <input type="file" class="form-control" id="inputImage" name="file" accept="image/*">
                                 </div>
                                 <div class="text-center">
-                                  <button type="button" class="btn btn-primary" id="prediksi_submit">Proses</button>
+                                  <button type="submit" class="btn btn-primary" id="prediksi_submit">Proses</button>
                                 </div>
                               </form>
                         </div>

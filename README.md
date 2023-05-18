@@ -30,6 +30,6 @@
 9. pip install scikit-learn==1.2.2
 10. pip install torch==2.4.1
 11. pip install Pillow==9.5.0
-12. pip install ssl
+12. python -m pip install certifi
 
 

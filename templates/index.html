@@ -9,7 +9,7 @@
 
         <title>Skin Quality Analysis - Good Vibes Mood</title>
       
-        <link rel="shortcut icon" href="images/logo.jpg" type="image/x-icon">
+        <link rel="shortcut icon" href="../static/images/logo.jpg" type="image/x-icon">
 
         <!-- CSS FILES -->                
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,11 +18,11 @@
 
         <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
 
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="../static/css/bootstrap.min.css" rel="stylesheet">
 
-        <link href="css/bootstrap-icons.css" rel="stylesheet">
+        <link href="../static/css/bootstrap-icons.css" rel="stylesheet">
 
-        <link href="css/templatemo-tiya-golf-club.css" rel="stylesheet">
+        <link href="../static/css/templatemo-tiya-golf-club.css" rel="stylesheet">
         
     </head>
     
@@ -33,7 +33,7 @@
             <nav class="navbar navbar-expand-lg">                
                 <div class="container">
                     <a class="navbar-brand d-flex align-items-center" href="index.html">
-                        <img src="images/logoNoBg.png" style="height: 80px;" alt="Tiya Golf Club">
+                        <img src="../static/images/logoNoBg.png" style="height: 80px;" alt="Tiya Golf Club">
                         <span class="navbar-brand-text">
                             G V M 
                             <small>Good Vibes Mood</small>
@@ -97,7 +97,7 @@
 
                         <div class="col-lg-6 col-12">
                             <div class="ratio ratio-16x9">
-                                <img width="560" height="315" src="images/pict1.png" title="wajah" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allow fullscreen>
+                                <img width="560" height="315" src="../static/images/pict1.png" title="wajah" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allow fullscreen>
                             </div>
                         </div>
 
@@ -131,7 +131,7 @@
                         <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0 mb-md-0">
                             <div class="member-block">
                                 <div class="member-block-image-wrap" style="height: 18rem;"> 
-                                    <img src="images/members/clara.jpg"  class="member-block-image img-fluid" alt="">
+                                    <img src="../static/images/members/clara.jpg"  class="member-block-image img-fluid" alt="">
 
                                     <ul class="social-icon">
                                         <li class="social-icon-item">
@@ -156,7 +156,7 @@
                         <div class="col-lg-4 col-md-6 col-12">
                             <div class="member-block">
                                 <div class="member-block-image-wrap" style="height: 18rem;"> 
-                                    <img src="images/members/joel.jpg"  class="member-block-image img-fluid" alt="">
+                                    <img src="../static/images/members/joel.jpg"  class="member-block-image img-fluid" alt="">
 
                                     <ul class="social-icon">
                                         <li class="social-icon-item">
@@ -180,7 +180,7 @@
                         <div class="col-lg-4 col-md-6 col-12">
                             <div class="member-block">
                                 <div class="member-block-image-wrap" style="height: 18rem;"> 
-                                    <img src="images/members/puja1.jpg"  class="member-block-image img-fluid" alt="">
+                                    <img src="../static/images/members/puja1.jpg"  class="member-block-image img-fluid" alt="">
 
                                     <ul class="social-icon">
                                         <li class="social-icon-item">
@@ -204,7 +204,7 @@
                         <div class="col-lg-4 col-md-6 col-12">
                             <div class="member-block">
                                 <div class="member-block-image-wrap" style="height: 18rem;"> 
-                                    <img src="images/members/putri.jpg"  class="member-block-image img-fluid" alt="">
+                                    <img src="../static/images/members/putri.jpg"  class="member-block-image img-fluid" alt="">
 
                                     <ul class="social-icon">
                                         <li class="social-icon-item">
@@ -228,7 +228,7 @@
                         <div class="col-lg-4 col-md-6 col-12">
                             <div class="member-block">
                                 <div class="member-block-image-wrap" style="height: 18rem;"> 
-                                    <img src="images/members/wisnu.jpg"  class="member-block-image img-fluid" alt="">
+                                    <img src="../static/images/members/wisnu.jpg"  class="member-block-image img-fluid" alt="">
 
                                     <ul class="social-icon">
                                         <li class="social-icon-item">
@@ -252,7 +252,7 @@
                         <div class="col-lg-4 col-md-6 col-12">
                             <div class="member-block">
                                 <div class="member-block-image-wrap" style="height: 18rem;"> 
-                                    <img src="images/members/rita.jpg"  class="member-block-image img-fluid" alt="">
+                                    <img src="../static/images/members/rita.jpg"  class="member-block-image img-fluid" alt="">
 
                                     <ul class="social-icon">
                                         <li class="social-icon-item">
@@ -295,19 +295,20 @@
                                 <div class="mb-3">
                                   <label for="inputImage" class="form-label">Upload Gambar</label>
                                   <div>
-                                    <img src="images/face_example.jpg" alt="Contoh Foto" style="max-width: 5cm;   border-radius: 10px;">
+                                    <img src="../static/images/face_example.jpg" alt="Contoh Foto" style="max-width: 5cm;   border-radius: 10px;">
                                     <p>Coba aplikasi untuk mengetahui produk scincare mana yang cocok untuk anda</p>
                                   </div>
-                                  <input type="file" class="form-control" id="inputImage" accept="image/*">
+                                  <input type="file" class="form-control" id="inputImage" name="file" accept="image/*">
                                 </div>
                                 <div class="text-center">
-                                  <button type="button" class="btn btn-primary" onclick="processImage()">Proses</button>
+                                  <button type="button" class="btn btn-primary" id="prediksi_submit">Proses</button>
                                 </div>
                               </form>
                         </div>
 
                         <div class="col-lg-5 col-12 mx-auto">
                         <h4 class="mb-4 pb-lg-2">Recommendation Produck</h4>
+                        <!-- Hasil ditampilkan disini -->
                         <div id="outputArea">
                             <div class="box">
                               <img src="https://dummyimage.com/300x300/000/fff" alt="Gambar Produk">
@@ -315,7 +316,7 @@
                             </div>
                           </div>
                         </div>
-
+                        <!-- Hasil ditampilkan disini -->
                     </div>
                 </div>
             </section>
@@ -402,13 +403,13 @@
 
 
         <!-- JAVASCRIPT FILES -->
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/jquery.sticky.js"></script>
-        <script src="js/click-scroll.js"></script>
-        <script src="js/animated-headline.js"></script>
-        <script src="js/modernizr.js"></script>
-        <script src="js/custom.js"></script>
+        <script src="../static/js/jquery.min.js"></script>
+        <script src="../static/js/bootstrap.bundle.min.js"></script>
+        <script src="../static/js/jquery.sticky.js"></script>
+        <script src="../static/js/click-scroll.js"></script>
+        <script src="../static/js/animated-headline.js"></script>
+        <script src="../static/js/modernizr.js"></script>
+        <script src="../static/js/custom.js"></script>
 
     </body>
 </html>

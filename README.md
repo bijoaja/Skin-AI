@@ -19,17 +19,18 @@
 ## [Environment & Packages Installation]
 =======================================
 
-1. conda create -n skin_app python=3.11.3
-2. activate skin_app
-3. pip install Flask==2.3.2
-4. pip install Werkzeug==2.3.4
-5. pip install joblib==1.2.0
-6. pip install pandas==2.0.1
-7. pip install numpy==1.24.3
-8. pip install matplotlib==3.7.1
-9. pip install scikit-learn==1.2.2
-10. pip install torch==2.4.1
-11. pip install Pillow==9.5.0
-12. python -m pip install certifi
+1. pip install virtualenv
+2. virtualenv skin_app
+3. source skin_app/scripts/activate
+4. pip install Flask==2.3.2
+5. pip install Werkzeug==2.3.4
+6. pip install joblib==1.2.0
+7. pip install pandas==2.0.1
+8. pip install numpy==1.24.3
+9. pip install matplotlib==3.7.1
+10. pip install scikit-learn==1.2.2
+11. pip install torch==2.4.1
+12. pip install Pillow==9.5.0
+13. python -m pip install certifi
 
-
+You can run App in terminal with code ```python skinApp.py``` on virtualenv when you activate

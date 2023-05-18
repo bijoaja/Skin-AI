@@ -1177,6 +1177,32 @@ color:white;
 }
 h1, h2, h3, h4, h5, h6 {
   color: #4b505e;
+
+}
+.new_footer_top .f_widget.about-widget .f_list li a {
+  color: #6a7695;
+}
+
+.new_footer_top .f_social_icon a:hover {
+  background: #5e2ced;
+  border-color: #5e2ced;
+color:white;
+}
+.new_footer_top .f_social_icon a + a {
+  margin-left: 4px;
+}
+.new_footer_top .f-title {
+  margin-bottom: 30px;
+  color: #263b5e;
+}
+.f_600 {
+  font-weight: 600;
+}
+.f_size_18 {
+  font-size: 18px;
+}
+h1, h2, h3, h4, h5, h6 {
+  color: #4b505e;
 }
 .new_footer_top .f_widget.about-widget .f_list li a {
   color: #6a7695;

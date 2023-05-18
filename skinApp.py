@@ -6,6 +6,9 @@ app = Flask(__name__, static_url_path='/static')
 def home():
     return render_template("index.html")
 
+def detected():
+    pass
+
 # =[Main]========================================		
 
 if __name__ == '__main__':

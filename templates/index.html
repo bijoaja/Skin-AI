@@ -188,11 +188,11 @@
                         <div class="col-lg-5 col-12 mx-auto">
                             <h4 class="mb-4 pb-lg-2">Recommendation Produck</h4>
                             <!-- Start Hasil ditampilkan disini -->
-                            <div id="outputArea">
-                                <div class="box">
-                                    <p>Your Problem: Acne </p>
+                            <div>
+                                <div class="box" id="outputArea">
+                                    <p>Your Problem: - </p>
                                     <img src="https://dummyimage.com/300x300/000/fff" alt="Gambar Produk">
-                                    <p>Product Name: Garnier</p>
+                                    <p>Product Name: -</p>
                                 </div>
                             </div>
                         </div>
@@ -290,6 +290,8 @@
         <script src="../static/js/animated-headline.js"></script>
         <script src="../static/js/modernizr.js"></script>
         <script src="../static/js/custom.js"></script>
+        <!-- JavaScript untuk Animasi Scroll dan Prediksi Model -->
+        <script src="{{ url_for('static', filename='/js/client_side.js' ) }}"></script>
 
     </body>
 </html>

@@ -138,8 +138,8 @@ strong {
 }
 
 .section-padding {
-  padding-top: 100px;
-  padding-bottom: 100px;
+  padding-top: 30px;
+  padding-bottom: 50px;
 }
 
 .section-overlay {
@@ -1209,13 +1209,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .box {
+  width: 360px;
+  height: 380px;
+  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   border: 1px solid black;
   padding: 1em;
-  margin: 1em;
   border-radius: 10px;
+
 }
 
 .box img {

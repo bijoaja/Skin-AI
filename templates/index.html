@@ -163,39 +163,43 @@
                 <div class="container">
                     <div class="row">
 
-                        <div class="col-lg-12 col-12 text-center mx-auto mb-lg-5 mb-4">
-                            <h2><span>Scincare</span> Recommendation</h2>
+                        <div class="col-lg-12 col-12 text-center mx-auto mb-3">
+                            <h2><span>Scincare Analysis</span> & Recommendation</h2>
                         </div>
 
-                        <div class="col-lg-6 col-12 mb-3 mb-lg-0">
-                            <h4 class="mb-4 pb-lg-2">Face Detection</h4>
-
-                            <form method="POST" enctype="multipart/form-data">
+                        <div class="d-flex justify-content-center">
+                            <form>
                                 <div class="mb-3">
-                                  <label for="inputImage" class="form-label">Upload Gambar</label>
-                                  <div>
-                                    <img src="../static/images/face_example.jpg" alt="Contoh Foto" style="max-width: 5cm;   border-radius: 10px;">
-                                    <p>Coba aplikasi untuk mengetahui produk scincare mana yang cocok untuk anda</p>
-                                  </div>
-                                  <input type="file" class="form-control" id="inputImage" name="file" accept="image/*">
+                                    <div class="d-flex justify-content-center">
+                                        <img src="../static/images/face_example.jpg" class="mb-4" alt="Contoh Foto" style="max-width: 8cm; border-radius: 10px;">
+                                    </div>
+                                    <p class="text-center">Coba aplikasi untuk mengetahui produk skincare mana yang cocok untuk Anda</p>
+                            
+                                    <label for="inputImage" class="form-label">Upload Gambar</label>
+                                    <input type="file" class="form-control" id="inputImage" accept="image/*">
                                 </div>
-                                <div class="text-center">
-                                  <button type="submit" class="btn btn-primary" id="prediksi_submit">Proses</button>
+                                <div class="text-center mb-4 pb-lg-2">
+                                    <button type="submit" class="btn btn-primary" id="prediksi_submit">Proses</button>
                                 </div>
-                              </form>
-                        </div>
+                            </form>
+                            
+                        </div> 
 
-                        <div class="col-lg-5 col-12 mx-auto">
-                            <h4 class="mb-4 pb-lg-2">Recommendation Produck</h4>
-                            <!-- Start Hasil ditampilkan disini -->
-                            <div>
-                                <div class="box" id="outputArea">
-                                    <p>Your Problem: - </p>
-                                    <img src="https://dummyimage.com/300x300/000/fff" alt="Gambar Produk">
-                                    <p>Product Name: -</p>
-                                </div>
+                        <div class="col-lg-6 col-12 mb-3 mb-lg-0 text-center">
+                            <h4 class="mb-4 pb-lg-2">Face Detection</h4>
+                            <div id="outputAreaProduk" class="box mx-auto">
+                                <img src="https://dummyimage.com/350x350/000/fff" alt="Gambar Wajah">
+                                <p>Your Problem: - </p>
                             </div>
                         </div>
+
+                        <div class="col-lg-5 col-12 text-center">
+                        <h4 class="mb-4 pb-lg-2">Recommendation Produck</h4>
+                        <div id="outputAreaProduk" class="box mx-auto">
+                            <img src="https://dummyimage.com/350x350/000/fff" alt="Gambar Produk">
+                            <p>Product Name: -</p>
+                        </div>
+
                         <!-- End Hasil ditampilkan disini -->
                     </div>
                 </div>
@@ -206,7 +210,7 @@
 
         <!-- Start Footer -->
         <footer class="new_footer_area bg_color">
-            <div class="new_footer_top">
+            <div class="new_footer_top" id="section_4">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-3 col-md-6">

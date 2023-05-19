@@ -1209,8 +1209,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .box {
-  width: 360px;
-  height: auto;
+  width: 350px;
+  height: 350px;
   background-color: white;
   display: flex;
   flex-direction: column;

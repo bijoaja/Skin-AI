@@ -6,7 +6,6 @@ import torchvision.models as models
 import torchvision.transforms as transforms
 import torch.nn as nn
 import os
-import time
 from PIL import Image
 import numpy as np
 
@@ -108,12 +107,10 @@ def apiDeteksi():
     # Get File Gambar yg telah diupload pengguna
     uploaded_file = request.files['file']
     filename      = secure_filename(uploaded_file.filename)
-    # filename      = os.listdir("static/images/results/")
 
     if filename != '':
     	
         # Set/mendapatkan extension dan path dari file yg diupload
-        # file_ext        = filename[len(filename)-1]
         gambar_prediksi = f'/static/images/results/{filename}'
         
         # Simpan Gambar

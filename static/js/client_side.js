@@ -45,14 +45,12 @@ $(document).ready(function(){
       if(image_prediksi == "(none)") {
         str += "<h3>Your Image is error</h3>";
         str += "<img src='https://dummyimage.com/300x300/000/fff' alt='Gambar Produk'>";
-        str += "<p>Your Product is error</p>"
       }
       else {
-        str += "<p>Your Problem on Face: <b>"+ data_prediksi +"</b></p>";
+        str += "<p>Your Problem on Face: <b>"+ data_prediksi +"</b></p>" 
         str += "<img src='" + image_prediksi + "'width=\"350\" height=\"350\" alt='Gambar Produk'>";
-        str += "<p>Product Name: Garnier </p>" //Masih belum predict 
       }
-      $("#outputArea").html(str);
+      $("#outputAreaFace").html(str);
     }  
   })
     

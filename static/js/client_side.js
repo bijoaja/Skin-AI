@@ -26,8 +26,6 @@ $(document).ready(function(){
                       res_gambar_prediksi = res['gambar_prediksi']
                       
                       // Tampilkan hasil prediksi ke halaman web
-                      console.log(res_data_prediksi)
-                      console.log(res_gambar_prediksi)
                       generate_prediksi(res_data_prediksi, res_gambar_prediksi); 
                 }
               });

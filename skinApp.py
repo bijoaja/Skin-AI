@@ -1,6 +1,7 @@
 from flask import Flask,render_template,request,jsonify,url_for
 from werkzeug.utils import secure_filename
 import torch
+import torchvision
 import torchvision.models as models
 import torchvision.transforms as transforms
 import torch.nn as nn
@@ -9,27 +10,48 @@ import time
 from PIL import Image
 import numpy as np
 
+from efficientnet_pytorch import EfficientNet
+
 
 app = Flask(__name__, static_url_path='/static')
 
+### MODEL Densenet201 ###
 # Load a pre-trained DenseNet model
-model = models.densenet201(pretrained=False)
+# model = models.densenet201(pretrained=False)
 
 # Fine-tune the last few layers of the pre-trained model
-for param in model.features[-1].parameters():
-    param.requires_grad = True
-for param in model.features[-2].parameters():
-    param.requires_grad = True
-for param in model.features[-3].parameters():
-    param.requires_grad = True
+# for param in model.features[-1].parameters():
+#     param.requires_grad = True
+# for param in model.features[-2].parameters():
+#     param.requires_grad = True
+# for param in model.features[-3].parameters():
+#     param.requires_grad = True
 
 # Modify the last fully connected layer to match the number of classes
-num_classes = 14
-in_features = model.classifier.in_features
-model.classifier = nn.Linear(in_features, num_classes)
+# num_classes = 14
+# in_features = model.classifier.in_features
+# model.classifier = nn.Linear(in_features, num_classes)
     
-NUM_CLASSES = 14
-face_classes= ["Dermatitis perioral", "Fungal Acne", "milia", "rosacea", "folikulitis", "Eksim", "herpes", "blackhead", "panu", "kutil filiform", "acne nodules", "flek hitam", "Pustula", "whitehead"]
+# NUM_CLASSES = 14
+# face_classes= ["Dermatitis perioral", "Fungal Acne", "milia", "rosacea", "folikulitis", "Eksim", "herpes", "blackhead", "panu", "kutil filiform", "acne nodules", "flek hitam", "Pustula", "whitehead"]
+
+### End Model DenseNett201 ###
+
+## Model efficience Net
+model = EfficientNet.from_pretrained('efficientnet-b7')
+
+# Fine-tune the last few layers of the pre-trained model
+for param in model._fc.parameters():
+    param.requires_grad = True
+    
+# Modify the last fully connected layer to match the number of classes
+num_classes = 5
+in_features = model._fc.in_features
+model._fc = nn.Linear(in_features, num_classes)
+
+face_classes = ['pustula', 'flek hitam', 'rosacea', 'blackhead', 'whitehead']
+## End Model
+
 hasil_prediksi  = '(none)'
 gambar_prediksi = '(none)'
 
@@ -132,13 +154,12 @@ def apiDeteksi():
 # predict product recommendation
 def recommendation():
     pass
-
-# =[Main]========================================		
+		
 
 if __name__ == '__main__':
     # Load model yang telah ditraining
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-    model.load_state_dict(torch.load('DenseNet161.pth'))
+    model.load_state_dict(torch.load('model_skin90.pth'))
     model.to(device)
 
 	# Run Flask di localhost 

@@ -11,7 +11,7 @@
 - numpy      1.24.3
 - matplotlib 3.7.1
 - sklearn    1.2.2
-- torch      2.4.1
+- torch      2.0.1
 - torchvision 0.15.2
 - transforms 0.1
 - Pillow     9.5.0
@@ -31,7 +31,7 @@
 8. pip install numpy==1.24.3
 9. pip install matplotlib==3.7.1
 10. pip install scikit-learn==1.2.2
-11. pip install torch==2.4.1
+11. pip install torch==2.0.1
 12. pip install torchvision==0.15.2
 13. pip install transforms==0.1
 14. pip install Pillow==9.5.0

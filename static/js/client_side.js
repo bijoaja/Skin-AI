@@ -26,7 +26,9 @@ $(document).ready(function(){
                       res_gambar_prediksi = res['gambar_prediksi']
                       
                       // Tampilkan hasil prediksi ke halaman web
-                      generate_prediksi(res_data_prediksi, res_gambar_prediksi); 
+                      generate_prediksi(res_data_prediksi, res_gambar_prediksi);
+                      // Rekomennya masih belum
+                      generate_recomenn(res_data_prediksi, res_gambar_prediksi)
                 }
               });
           }
@@ -49,6 +51,21 @@ $(document).ready(function(){
       else {
         str += "<p>Your Problem on Face: <b>"+ data_prediksi +"</b></p>" 
         str += "<img src='" + image_prediksi + "'width=\"350\" height=\"350\" alt='Gambar Produk'>";
+      }
+      $("#outputAreaFace").html(str);
+    }
+
+    // Fungsi untuk menampilkan hasil prediksi rekomendasi
+    function generate_recomenn(product_prediction, product_image) {
+      var str="";
+      
+      if(product_image == "(none)") {
+        str += "<h3>Your Image is error</h3>";
+        str += "<img src='https://dummyimage.com/300x300/000/fff' alt='Gambar Produk'>";
+      }
+      else {
+        str += "<p>Product on Your Face: <b>"+ product_prediction +"</b></p>" 
+        str += "<img src='" + product_image + "'width=\"350\" height=\"350\" alt='Gambar Produk'>";
       }
       $("#outputAreaFace").html(str);
     }  

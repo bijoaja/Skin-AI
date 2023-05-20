@@ -37,4 +37,13 @@
 14. pip install Pillow==9.5.0
 15. python -m pip install certifi
 
+=======================================
+## [Download Model]
+=======================================
+* DenseNet161.pth
+Link: -
+* DenseNet161(1).pth
+Link: -
+* model_skin90.pth
+Link: -
 You can run App in terminal with code ```python skinApp.py``` on virtualenv when you activate

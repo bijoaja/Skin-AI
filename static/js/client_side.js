@@ -95,6 +95,7 @@ $(document).ready(function(){
     })
      
     // Fungsi untuk menampilkan hasil prediksi analysis pada wajah
+
     function generate_prediksi(data_prediksi, image_prediksi) {
       var str="";
       
@@ -103,25 +104,25 @@ $(document).ready(function(){
         str += "<img src='https://dummyimage.com/250x250/000/fff' alt='Gambar Produk'>";
       }
       else {
-        str += "<p>Your Problem on Face: <b>"+ data_prediksi +"</b></p>";
-        str += "<img src='" + image_prediksi + "'width=\"300\" height=\"300\" alt='Gambar Produk'>";
+        str += "<p>Your Problem on Face: <b>"+ data_prediksi +"</b></p>" 
+        str += "<img src='" + image_prediksi + "'width=\"250\" height=\"250\" alt='Gambar Produk'>";
       }
       $("#outputAreaFace").html(str);
     }
 
     // Fungsi untuk menampilkan hasil prediksi analysis pada wajah
-    function generate_recomenn(data_product, image_product) {
+    function generate_recomenn(product_prediction, product_image) {
       var str="";
       
-      if(image_product == "(none)") {
+      if(image_prediksi == "(none)") {
         str += "<h3>Your Image is error</h3>";
-        str += "<img src='https://dummyimage.com/250x250/000/fff' alt='Gambar Produk'>";
+        str += "<img src='https://dummyimage.com/300x300/000/fff' alt='Gambar Produk'>";
       }
       else {
-        str += "<p>Product for Your Face: <b>"+ data_product +"</b></p>";
-        str += "<img src='" + image_prediksi + "'width=\"250\" height=\"250\" alt='Gambar Produk'>";
+        str += "<p>Product on Your Face: <b>"+ product_prediction +"</b></p>" 
+        str += "<img src='" + product_image + "'width=\"250\" height=\"250\" alt='Gambar Produk'>";
       }
       $("#outputAreaFace").html(str);
-    }    
+    } 
   })
   

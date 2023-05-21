@@ -1213,8 +1213,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .box {
+<<<<<<< HEAD
   width: 350px;
   height: 350px;
+=======
+  width: 360px;
+  height: auto;
+>>>>>>> 8bc41681101b602b89dee79aee67e95a6bab05e6
   background-color: white;
   display: flex;
   flex-direction: column;

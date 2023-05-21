@@ -29,12 +29,12 @@ $(document).ready(function(){
 
     // Fungsi untuk memeriksa apakah ada skin tone yang dipilih
   function checkSkinToneSelected() {
-    var selectedValue = $('#skinToneSelect').val();
+    var selectedValue = $('#selectSkinTone').val();
     $("#prediksi_submit").prop("disabled", !selectedValue);
   }
 
   // Memanggil fungsi checkSkinToneSelected saat ada perubahan pada pemilihan skin tone
-  $('#skinToneSelect').on("change", function() {
+  $('#selectSkinTone').on("change", function() {
     checkSkinToneSelected();
   });
 
@@ -46,7 +46,7 @@ $(document).ready(function(){
     e.preventDefault();
 
     // Cek kembali apakah ada skin tone yang dipilih
-    var selectedValue = $('#skinToneSelect').val();
+    var selectedValue = $('#selectSkinTone').val();
     if (!selectedValue) {
       alert("Please choose your skin tone first!");
       return;
@@ -58,8 +58,10 @@ $(document).ready(function(){
       
       // Get File Gambar yg telah diupload pengguna
       var file_data = $('#inputImage').prop('files')[0];   
+      var select_data = $('#inputImage').prop('files')[1];   
       var pics_data = new FormData();                  
       pics_data.append('file', file_data);
+      pics_data.append('selectSkinTone', select_data)
   
       // Panggil API dengan timeout 1 detik (1000 ms)
       setTimeout(function() {
@@ -74,11 +76,12 @@ $(document).ready(function(){
                       // Ambil hasil prediksi dan path gambar yang diprediksi dari API
                       res_data_prediksi   = res['prediksi']
                       res_gambar_prediksi = res['gambar_prediksi']
+                      res_data_rekomendasi = res['data_rekomendasi']
                       
                       // Tampilkan hasil prediksi ke halaman web
                       generate_prediksi(res_data_prediksi, res_gambar_prediksi);
                       // Rekomennya masih belum
-                      generate_recomenn(res_data_prediksi, res_gambar_prediksi)
+                      generate_recomenn(res_data_rekomendasi)
                 }
               });
           }
@@ -111,18 +114,18 @@ $(document).ready(function(){
     }
 
     // Fungsi untuk menampilkan hasil prediksi analysis pada wajah
-    function generate_recomenn(data_product, image_product) {
+    function generate_recomenn(data_rekomendasi) {
       var str="";
-      
-      if(image_product == "(none)") {
+      console.log(data_rekomendasi[0]["Skin_Tone"])
+      if(data_rekomendasi[0]["Product_url"] == "(none)") {
         str += "<h3>Your Image is error</h3>";
         str += "<img src='https://dummyimage.com/250x250/000/fff' alt='Gambar Produk'>";
       }
       else {
-        str += "<p>Product for Your Face: <b>"+ data_product +"</b></p>";
-        str += "<img src='" + image_prediksi + "'width=\"250\" height=\"250\" alt='Gambar Produk'>";
+        str += "<p><b>"+ data_rekomendasi[0]["Product"] +"</b></p>";
+        str += "<img src='" + data_rekomendasi[0]["Product_url"] + "'width=\"250\" height=\"250\" alt='Gambar Produk'>";
       }
-      $("#outputAreaFace").html(str);
+      $("#outputAreaProduk").html(str);
     }    
   })
   

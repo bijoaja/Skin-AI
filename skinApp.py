@@ -1,4 +1,5 @@
 from flask import Flask,render_template,request,jsonify
+import os
 from werkzeug.utils import secure_filename
 import torch
 import torchvision.models as models
@@ -6,7 +7,10 @@ import torchvision.transforms as transforms
 import torch.nn as nn
 from torch.autograd import Variable
 import torch.nn.functional as F
-import os
+import pickle
+import pandas as pd
+from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import OneHotEncoder
 from PIL import Image
 import numpy as np
 
@@ -14,7 +18,9 @@ app = Flask(__name__, static_url_path='/static')
 
 ##### Model Resnet18 ####
 
-face_classes = ['Dermatitis perioral', 'Eksim', 'Pustula', 'acne nodules', 'blackhead', 'flek hitam', 'folikulitis', 'fungal acne', 'herpes', 'kutil filiform', 'milia', 'panu', 'rosacea', 'whitehead']
+face_classes = ['Dermatitis perioral', 'Eksim', 'Pustula', 'acne nodules', 'blackhead', 'Flek hitam', 'folikulitis', 'fungal acne', 'herpes', 'kutil filiform', 'milia', 'panu', 'rosacea', 'whitehead']
+
+# blackhead, flek hitam, 
 
 # Check if GPU is available
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -27,6 +33,7 @@ model = model_ft.to(device)
 
 hasil_prediksi  = '(none)'
 gambar_prediksi = '(none)'
+data_recomm = []
 
 app.config['UPLOAD_PATH'] = '/static/images/results/'
 
@@ -115,7 +122,7 @@ def predict2(uploaded_file_path, model, topk=5):
     
     return (e.data.numpy().squeeze().tolist() for e in topk)
 		
-# [Routing untuk API]	
+# [Routing untuk API Face Analysis]	
 @app.route("/api/faceDetect",methods=['POST'])
 def apiDeteksi():
     # Set nilai default untuk hasil prediksi dan gambar yang diprediksi
@@ -128,7 +135,7 @@ def apiDeteksi():
     	
         # Set/mendapatkan extension dan path dari file yg diupload
         gambar_prediksi = f'/static/images/results/{filename}'
-        
+
         # Simpan Gambar
         save_path = os.path.join("static/images/results/", filename)
         uploaded_file.save(save_path)
@@ -137,23 +144,84 @@ def apiDeteksi():
 
         probs, classes = predict2(f'.{gambar_prediksi}', model_ft.to(device))
         probsMax = max(probs)
-        hasil_prediksi = classes[probs.index(probsMax)]
-
+        hasil_prediksi = classes[probs.index(probsMax)] if probsMax>0.9 else 'Normal / Not Detect'
+        faceClasses = face_classes[int(hasil_prediksi)]
+        
+        recomm = recommendation(faceClasses, "Medium")
+        # skinnT = skinTone()
+        
+        for index, row in recomm.iterrows():
+            # Buat objek baru dan tambahkan nilai dari setiap kolom
+            obj = {
+                'Product': row['Product'],
+                'Product_Url': row['Product_Url']
+                # 'Skin_Tone': skinnT
+            }
+            # Tambahkan objek ke dalam array_of_objects
+            data_recomm.append(obj)
+        
+        # data_recomm.append({"Product": faceClasses, "Product_url":gambar_prediksi})
+        
     # Return hasil prediksi dengan format JSON
     return jsonify({
-        "prediksi": face_classes[int(hasil_prediksi)],
-        "gambar_prediksi" : gambar_prediksi
+        "prediksi": faceClasses,
+        "gambar_prediksi" : gambar_prediksi,
+        "data_rekomendasi": data_recomm
     })
 
-# predict product recommendation
-def recommendation():
-    pass
+# @app.route("/api/faceDetect", methods=['POST'])
+# def skinTone():
+#     skintone = request.form['selectSkinTone']
+#     return skintone
+    
+
+# Recommendation Product
+def recommendation(skintype, skintone):  # sourcery skip: avoid-builtin-shadow
+    # Load the dataframe
+    df = pd.read_csv('data_product_recommendation.csv', index_col=[0])
+    
+    # Filter the dataframe based on the given features
+    ddf = df[(df['Skin_Type'] == skintype) & (df['Skin_Tone'] == skintone)]
+
+    # Encode categorical features
+    encoder = OneHotEncoder(sparse=False)
+    encoded_features = encoder.fit_transform(df[['Skin_Type', 'Skin_Tone']])
+
+    # Prepare training data
+    X_train = encoded_features
+    y_train = df['Good_Stuff']
+
+    # Fit the model with training data
+    modelL.fit(X_train, y_train)
+
+    # Make predictions using the fitted model
+    encoded_new_data = encoder.transform(ddf[['Skin_Type', 'Skin_Tone']])
+    prediksi = modelL.predict(encoded_new_data)
+
+    # Use the prediction to recommend products
+    recommendations = ddf[ddf['Rating_Stars'].notnull()]
+    recommendations['Prediction'] = prediksi
+    recommendations = recommendations.sort_values(by=['Prediction', 'Rating_Stars', 'Price', 'Good_Stuff'], ascending=[False, False, True, False])
+
+    # Create a new dataframe and reset the index from 1
+    result = pd.DataFrame(recommendations[['Product', 'Brand', 'Category', 'Price', 'Good_Stuff', 'Ingredients', 'Rating_Stars', 'Product_Url']]).reset_index(drop=True)
+    result.index += 1
+
+    # Remove duplicate data and filter by ingredients
+    result = result.drop_duplicates(subset="Product")
+    # filter_product = result[result["Product"] == prediksi[0]]
+    filter = result["Ingredients"] != "No Info"
+    result = result[filter]
+    
+    return result
 		
 
 if __name__ == '__main__':
     # Load model yang telah ditraining
     model.load_state_dict(torch.load('model_resnet18.pth'))
     model.to(device)
+    
+    modelL = pickle.load(open("logisticRegression.pkl", "rb"))
 
 	# Run Flask di localhost 
     app.run(host='127.0.0.1', port=5001, debug=True)

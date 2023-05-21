@@ -104,7 +104,7 @@ $(document).ready(function(){
       }
       else {
         str += "<p>Your Problem on Face: <b>"+ data_prediksi +"</b></p>" 
-        str += "<img src='" + image_prediksi + "'width=\"350\" height=\"350\" alt='Gambar Produk'>";
+        str += "<img src='" + image_prediksi + "'width=\"250\" height=\"250\" alt='Gambar Produk'>";
       }
       $("#outputAreaFace").html(str);
     }
@@ -119,7 +119,7 @@ $(document).ready(function(){
       }
       else {
         str += "<p>Product on Your Face: <b>"+ product_prediction +"</b></p>" 
-        str += "<img src='" + product_image + "'width=\"350\" height=\"350\" alt='Gambar Produk'>";
+        str += "<img src='" + product_image + "'width=\"250\" height=\"250\" alt='Gambar Produk'>";
       }
       $("#outputAreaFace").html(str);
     }  

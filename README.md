@@ -1,8 +1,8 @@
 # Project Face Quality Analysis
 
-===================
+=================
 ## [Packages List]
-===================
+=================
 - Python     3.11.3
 - Flask      2.3.2
 - Werkzeug   2.3.4
@@ -37,13 +37,21 @@
 14. pip install Pillow==9.5.0
 15. python -m pip install certifi
 
-=======================================
-## [Download Model]
-=======================================
-* DenseNet161.pth
-Link: -
-* DenseNet161(1).pth
-Link: -
-* model_skin90.pth
-Link: -
+==============================
+## [Model of Face Analysis and]
+## [Skincare Recommendation]
+==============================
+
+* model_resnet18.pth
+https://drive.google.com/file/d/1aRURp86D1qd5VgMkxG4o7x8MN8I3rlu3/view?usp=share_link
+
+* Modelling of Face Analysis
+https://drive.google.com/file/d/1XFnef8kKtDl8Ht6WbBFeuBU-SKMBFJxE/view?usp=share_link
+
+* logisticRegression.pkl
+https://drive.google.com/file/d/14trh249Ue1TNAhrH9Jq-Mhvk29VZJMI0/view?usp=share_link
+
+* Modelling of Recomenndation Product
+https://drive.google.com/file/d/1znBEhY0ZNkSKI4LHzyhOFW93QweBuEhu/view?usp=share_link
+
 You can run App in terminal with code ```python skinApp.py``` on virtualenv when you activate

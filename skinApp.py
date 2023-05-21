@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request,jsonify,url_for
+from flask import Flask,render_template,request,jsonify
 from werkzeug.utils import secure_filename
 import torch
 import torchvision.models as models
@@ -9,9 +9,6 @@ import torch.nn.functional as F
 import os
 from PIL import Image
 import numpy as np
-
-# from efficientnet_pytorch import EfficientNet
-
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -33,6 +30,7 @@ gambar_prediksi = '(none)'
 
 app.config['UPLOAD_PATH'] = '/static/images/results/'
 
+# Home page
 @app.route("/")
 def home():
     img_url = os.listdir('static/images/members')

@@ -48,14 +48,10 @@ $(document).ready(function(){
     // Cek kembali apakah ada skin tone yang dipilih
     var selectedValue = $('#skinToneSelect').val();
     if (!selectedValue) {
-      alert("Harap pilih skin tone terlebih dahulu!");
+      alert("Please choose your skin tone first!");
       return;
     }
 
-  });
-
-    // -[Prediksi Model]---------------------------
-    
     // Fungsi untuk memanggil API ketika tombol prediksi ditekan
     $("#prediksi_submit").click(function(e) {
       e.preventDefault();
@@ -94,6 +90,11 @@ $(document).ready(function(){
       }, 1000)  
     })
      
+
+  });
+
+    // -[Prediksi Model]---------------------------
+
     // Fungsi untuk menampilkan hasil prediksi analysis pada wajah
     function generate_prediksi(data_prediksi, image_prediksi) {
       var str="";

@@ -48,7 +48,7 @@ $(document).ready(function(){
     // Cek kembali apakah ada skin tone yang dipilih
     var selectedValue = $('#skinToneSelect').val();
     if (!selectedValue) {
-      alert("Harap pilih skin tone terlebih dahulu!");
+      alert("Please choose your skin tone first!");
       return;
     }
 

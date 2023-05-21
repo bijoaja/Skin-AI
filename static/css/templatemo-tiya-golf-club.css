@@ -1208,6 +1208,10 @@ h1, h2, h3, h4, h5, h6 {
   color: #6a7695;
 }
 
+#skinToneSelect option[disabled]:first-child {
+  color: rgba(0, 0, 0, 0.4);
+}
+
 .box {
   width: 360px;
   height: auto;
@@ -1217,6 +1221,7 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   border: 1px solid black;
   padding: 1em;
+  padding-bottom: 3em;
   border-radius: 10px;
 
 }

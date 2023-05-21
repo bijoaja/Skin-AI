@@ -52,10 +52,6 @@ $(document).ready(function(){
       return;
     }
 
-  });
-
-    // -[Prediksi Model]---------------------------
-    
     // Fungsi untuk memanggil API ketika tombol prediksi ditekan
     $("#prediksi_submit").click(function(e) {
       e.preventDefault();
@@ -94,6 +90,11 @@ $(document).ready(function(){
       }, 1000)  
     })
      
+
+  });
+
+    // -[Prediksi Model]---------------------------
+    
     // Fungsi untuk menampilkan hasil prediksi model
     function generate_prediksi(data_prediksi, image_prediksi) {
       var str="";

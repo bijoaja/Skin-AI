@@ -1,40 +1,36 @@
-from flask import Flask,render_template,request,jsonify,url_for
+from flask import Flask,render_template,request,jsonify
 from werkzeug.utils import secure_filename
 import torch
 import torchvision.models as models
 import torchvision.transforms as transforms
 import torch.nn as nn
+from torch.autograd import Variable
+import torch.nn.functional as F
 import os
-import time
 from PIL import Image
 import numpy as np
 
-
 app = Flask(__name__, static_url_path='/static')
 
-# Load a pre-trained DenseNet model
-model = models.densenet201(pretrained=False)
+##### Model Resnet18 ####
 
-# Fine-tune the last few layers of the pre-trained model
-for param in model.features[-1].parameters():
-    param.requires_grad = True
-for param in model.features[-2].parameters():
-    param.requires_grad = True
-for param in model.features[-3].parameters():
-    param.requires_grad = True
+face_classes = ['Dermatitis perioral', 'Eksim', 'Pustula', 'acne nodules', 'blackhead', 'flek hitam', 'folikulitis', 'fungal acne', 'herpes', 'kutil filiform', 'milia', 'panu', 'rosacea', 'whitehead']
 
-# Modify the last fully connected layer to match the number of classes
-num_classes = 14
-in_features = model.classifier.in_features
-model.classifier = nn.Linear(in_features, num_classes)
-    
-NUM_CLASSES = 14
-face_classes= ["Dermatitis perioral", "Fungal Acne", "milia", "rosacea", "folikulitis", "Eksim", "herpes", "blackhead", "panu", "kutil filiform", "acne nodules", "flek hitam", "Pustula", "whitehead"]
+# Check if GPU is available
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+model_ft = models.resnet18(pretrained=True)
+num_ftrs = model_ft.fc.in_features
+model_ft.fc = nn.Linear(num_ftrs, len(face_classes))
+model = model_ft.to(device)
+
+##### End Model Resnet18 ####
+
 hasil_prediksi  = '(none)'
 gambar_prediksi = '(none)'
 
 app.config['UPLOAD_PATH'] = '/static/images/results/'
 
+# Home page
 @app.route("/")
 def home():
     img_url = os.listdir('static/images/members')
@@ -78,20 +74,59 @@ def home():
     ]
     return render_template("index.html", imagesMember=img_url, memberData=member)
 
+# Proses image
+def process_image(image):
+    ''' Scales, crops, and normalizes a PIL image for a PyTorch model,
+        returns an Numpy array
+    '''
+    # TODO: Process a PIL image for use in a PyTorch model
+    # tensor.numpy().transpose(1, 2, 0)
+    preprocess = transforms.Compose([
+        transforms.Resize(256),
+        transforms.CenterCrop(224),
+        transforms.ToTensor(),
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], 
+                             std=[0.229, 0.224, 0.225])
+    ])
+    image = preprocess(image)
+    return image
+
+# predict product recommendation
+def predict2(uploaded_file_path, model, topk=5):
+    ''' Predict the class (or classes) of an image using a trained deep learning model.
+    '''
+    
+    # TODO: Implement the code to predict the class from an image file
+    img = Image.open(uploaded_file_path)
+    img = process_image(img)
+    
+    # Convert 2D image to 1D vector
+    img = np.expand_dims(img, 0)
+    
+    
+    img = torch.from_numpy(img)
+    
+    model.eval()
+    inputs = Variable(img).to(device)
+    logits = model.forward(inputs)
+    
+    ps = F.softmax(logits,dim=1)
+    topk = ps.cpu().topk(topk)
+    
+    return (e.data.numpy().squeeze().tolist() for e in topk)
+		
 # [Routing untuk API]	
-@app.route("/api/deteksi",methods=['POST'])
+@app.route("/api/faceDetect",methods=['POST'])
 def apiDeteksi():
     # Set nilai default untuk hasil prediksi dan gambar yang diprediksi
 
     # Get File Gambar yg telah diupload pengguna
     uploaded_file = request.files['file']
     filename      = secure_filename(uploaded_file.filename)
-    # filename      = os.listdir("static/images/results/")
 
     if filename != '':
     	
         # Set/mendapatkan extension dan path dari file yg diupload
-        # file_ext        = filename[len(filename)-1]
         gambar_prediksi = f'/static/images/results/{filename}'
         
         # Simpan Gambar
@@ -99,46 +134,25 @@ def apiDeteksi():
         uploaded_file.save(save_path)
 
         # Memuat Gambar
-        test_image = Image.open(f'.{gambar_prediksi}')
 
-        transform = transforms.Compose([
-            transforms.Resize(256),
-            transforms.CenterCrop(224),
-            transforms.ToTensor(),
-            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-        ])
-        input_tensor = transform(test_image).unsqueeze(0)
-
-        # Make predictions using your loaded model
-        with torch.no_grad():
-            output = model(input_tensor)
-
-        # Process the predictions
-        probabilities = torch.nn.functional.softmax(output, dim=1)
-        _, predicted_class = torch.max(probabilities, 1)
-        predicted_class = predicted_class.item()
-
-
-        # Prediksi Gambar
-
-        hasil_prediksi = face_classes[int(predicted_class)]
+        probs, classes = predict2(f'.{gambar_prediksi}', model_ft.to(device))
+        probsMax = max(probs)
+        hasil_prediksi = classes[probs.index(probsMax)]
 
     # Return hasil prediksi dengan format JSON
     return jsonify({
-        "prediksi": hasil_prediksi,
+        "prediksi": face_classes[int(hasil_prediksi)],
         "gambar_prediksi" : gambar_prediksi
     })
 
 # predict product recommendation
 def recommendation():
     pass
-
-# =[Main]========================================		
+		
 
 if __name__ == '__main__':
     # Load model yang telah ditraining
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-    model.load_state_dict(torch.load('DenseNet161.pth'))
+    model.load_state_dict(torch.load('model_resnet18.pth'))
     model.to(device)
 
 	# Run Flask di localhost 

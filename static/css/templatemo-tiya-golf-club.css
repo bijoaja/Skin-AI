@@ -943,8 +943,8 @@ strong {
   border-radius: var(--border-radius-medium);
 }
 .table-container {
-  background: white;
   border: 2px solid #3D405B;
+  background: white;
   border-radius: var(--border-radius-medium);
   height: 350px;
   overflow: hidden; /* Menyembunyikan konten tabel yang melampaui ketinggian maksimum */
@@ -988,6 +988,11 @@ strong {
 .table-responsive tbody th {
   border-radius: var(--border-radius-medium);
   vertical-align: middle;
+}
+
+.table-responsive tbody td ul li {
+  /* font-weight: bold; */
+  color: black;
 }
 
 .numbered-list ul {

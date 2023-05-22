@@ -943,6 +943,7 @@ strong {
   border-radius: var(--border-radius-medium);
 }
 .table-container {
+  background: white;
   border: 2px solid #3D405B;
   border-radius: var(--border-radius-medium);
   height: 350px;

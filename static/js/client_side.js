@@ -62,8 +62,34 @@ $(document).ready(function(){
       var pics_data = new FormData();                  
       pics_data.append('file', file_data);
       pics_data.append('selectSkinTone', select_data)
+
+      var selectElement = document.getElementById("selectSkinTone");
+      var selectedValue = selectElement.value;
   
       // Panggil API dengan timeout 1 detik (1000 ms)
+      setTimeout(function() {
+        try {
+              $.ajax({
+                  url : "/skinTone",
+                  type : "POST",
+                  data : { value: selectedValue },
+                  success: function(response) {
+                    // Handle the response from the server
+                    console.log("Succes");
+                  },
+                  error: function(xhr, status, error) {
+                    // Handle the error
+                    console.log(error);
+                  }
+              });
+          }
+          catch(e) {
+              // Jika gagal memanggil API, tampilkan error di console
+              console.log("Gagal !");
+              console.log(e);
+          } 
+      }, 1000)
+
       setTimeout(function() {
         try {
               $.ajax({
@@ -90,9 +116,9 @@ $(document).ready(function(){
               console.log("Gagal !");
               console.log(e);
           } 
-      }, 1000)  
+      }, 1000)
+      
     })
-     
 
   });
 
@@ -116,7 +142,6 @@ $(document).ready(function(){
     // Fungsi untuk menampilkan hasil prediksi analysis pada wajah
     function generate_recomenn(data_rekomendasi) {
       var str="";
-      console.log(data_rekomendasi[0]["Skin_Tone"])
       if(data_rekomendasi[0]["Product_url"] == "(none)") {
         str += "<h3>Your Image is error</h3>";
         str += "<img src='https://dummyimage.com/250x250/000/fff' alt='Gambar Produk'>";

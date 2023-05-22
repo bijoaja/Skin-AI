@@ -34,6 +34,7 @@ model = model_ft.to(device)
 hasil_prediksi  = '(none)'
 gambar_prediksi = '(none)'
 data_recomm = []
+skinntone = '(none)'
 
 app.config['UPLOAD_PATH'] = '/static/images/results/'
 
@@ -144,24 +145,24 @@ def apiDeteksi():
 
         probs, classes = predict2(f'.{gambar_prediksi}', model_ft.to(device))
         probsMax = max(probs)
-        hasil_prediksi = classes[probs.index(probsMax)] if probsMax>0.9 else 'Normal / Not Detect'
-        faceClasses = face_classes[int(hasil_prediksi)]
+        if probsMax>0.9:
+            faceClasses = face_classes[classes[probs.index(probsMax)]]
+        else:
+            faceClasses = 'Normal / Not Detect'
         
-        recomm = recommendation(faceClasses, "Medium")
-        # skinnT = skinTone()
+        skinT = selected_value(skinntone)
+        recomm = recommendation(faceClasses, skinT)
         
         for index, row in recomm.iterrows():
             # Buat objek baru dan tambahkan nilai dari setiap kolom
             obj = {
                 'Product': row['Product'],
                 'Product_Url': row['Product_Url']
-                # 'Skin_Tone': skinnT
             }
             # Tambahkan objek ke dalam array_of_objects
             data_recomm.append(obj)
         
-        # data_recomm.append({"Product": faceClasses, "Product_url":gambar_prediksi})
-        
+    print("From Api Detect: ",obj)
     # Return hasil prediksi dengan format JSON
     return jsonify({
         "prediksi": faceClasses,
@@ -169,17 +170,23 @@ def apiDeteksi():
         "data_rekomendasi": data_recomm
     })
 
-# @app.route("/api/faceDetect", methods=['POST'])
-# def skinTone():
-#     skintone = request.form['selectSkinTone']
-#     return skintone
+@app.route("/skinTone", methods=['POST'])
+def skinTone():
+    global skinntone
+    skinntone = request.form.get('value')
+    return skinntone
     
+def selected_value(value):
+    value = skinntone
+    return value
 
 # Recommendation Product
 def recommendation(skintype, skintone):  # sourcery skip: avoid-builtin-shadow
     # Load the dataframe
     df = pd.read_csv('data_product_recommendation.csv', index_col=[0])
     
+    # Create Condition For Cek skintype & skintone already exist in dataset
+    ## PROCESS
     # Filter the dataframe based on the given features
     ddf = df[(df['Skin_Type'] == skintype) & (df['Skin_Tone'] == skintone)]
 
@@ -209,7 +216,6 @@ def recommendation(skintype, skintone):  # sourcery skip: avoid-builtin-shadow
 
     # Remove duplicate data and filter by ingredients
     result = result.drop_duplicates(subset="Product")
-    # filter_product = result[result["Product"] == prediksi[0]]
     filter = result["Ingredients"] != "No Info"
     result = result[filter]
     
@@ -222,6 +228,7 @@ if __name__ == '__main__':
     model.to(device)
     
     modelL = pickle.load(open("logisticRegression.pkl", "rb"))
+
 
 	# Run Flask di localhost 
     app.run(host='127.0.0.1', port=5001, debug=True)

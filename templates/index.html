@@ -126,11 +126,11 @@
                         </div>
 
                         <!-- START GAMBAR MEMBER -->
-                        {%for member in imagesMember%}
+                        {%for member in memberData%}
                         <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0 mb-md-0">
                             <div class="member-block">
                                 <div class="member-block-image-wrap" style="height: 18rem;"> 
-                                    <img src="{{ url_for('static', filename='images/members/' + member) }}"  class="member-block-image img-fluid" alt="">
+                                    <img src="{{ url_for('static', filename='images/members/' + member.Image +'.jpg') }}"  class="member-block-image img-fluid" alt="">
 
                                     <ul class="social-icon">
                                         <li class="social-icon-item">

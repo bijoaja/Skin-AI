@@ -67,6 +67,10 @@ $(document).ready(function(){
       str += "<h3>Your Image is error</h3>";
       str += "<img src='https://dummyimage.com/250x250/000/fff' alt='Gambar Produk'>";
     }
+    else if(data_prediksi == "Upload JPG file"){
+      str += "<p>Your page Error: <b>"+ data_prediksi +"</b></p>";
+      str += "<img src='https://dummyimage.com/250x250/000/fff' alt='Gambar Produk'>";
+    }
     else {
       str += "<p>Your Problem on Face: <b>"+ data_prediksi +"</b></p>";
       str += "<img src='" + image_prediksi + "'width=\"300\" height=\"300\" alt='Gambar Produk'>";
@@ -75,6 +79,7 @@ $(document).ready(function(){
   }
 
   function generate_recomm(data_recom) {
+    console.log(data_recom)
     var str="";
     // Membuat list untuk data medications
     var medications = data_recom[0]["Medication"].map(function(medication) {

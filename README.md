@@ -24,7 +24,7 @@
 
 1. pip install virtualenv
 2. virtualenv skin_app
-3. source skin_app/scripts/activate
+3. source skin_app/scripts/activate `# Activate Virtualenv`
 4. pip install Flask==2.3.2
 5. pip install Werkzeug==2.3.4
 6. pip install joblib==1.2.0
@@ -50,10 +50,22 @@ https://drive.google.com/file/d/1aRURp86D1qd5VgMkxG4o7x8MN8I3rlu3/view?usp=share
 * Modelling of Face Analysis
 https://drive.google.com/file/d/1XFnef8kKtDl8Ht6WbBFeuBU-SKMBFJxE/view?usp=share_link
 
-* logisticRegression.pkl
-https://drive.google.com/file/d/14trh249Ue1TNAhrH9Jq-Mhvk29VZJMI0/view?usp=share_link
-
-* Modelling of Recomenndation Product
+* Dataset Recomendation Skincare
 https://drive.google.com/file/d/1znBEhY0ZNkSKI4LHzyhOFW93QweBuEhu/view?usp=share_link
 
-You can run App in terminal with code ```python skinApp.py``` on virtualenv when you activate
+
+==========================
+## [Tutorial Run Application]
+==========================
+
+ 1. git clone https://github.com/bijoaja/template-FP.git
+
+ 2. Copy Environment & Packages Installation to your terminal then `Enter`
+
+ 3. Download model_resnet18.pth and Dataset Recomendation Skincare to your directory
+
+ 4. You can run App in terminal with code `python skinApp.py` on virtualenv when you activate
+
+ 5. You can close App in terminal with code `ctrl+c` then run in terminal `deactivate` to out virtualenv
+
+

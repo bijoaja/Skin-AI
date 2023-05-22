@@ -3,18 +3,19 @@
 =================
 ## [Packages List]
 =================
-- Python     3.11.3
-- Flask      2.3.2
-- Werkzeug   2.3.4
-- joblib     1.2.0
-- pandas     2.0.1
-- numpy      1.24.3
-- matplotlib 3.7.1
-- sklearn    1.2.2
-- torch      2.0.1
+- Python      3.11.3
+- Flask       2.3.2
+- Werkzeug    2.3.4
+- joblib      1.2.0
+- pandas      2.0.1
+- numpy       1.24.3
+- matplotlib  3.7.1
+- sklearn     1.2.2
+- torch       2.0.1
 - torchvision 0.15.2
-- transforms 0.1
-- Pillow     9.5.0
+- transforms  0.1
+- Pillow      9.5.0
+- openpyxl    3.1.2
 - ssl
 
 =======================================
@@ -35,7 +36,8 @@
 12. pip install torchvision==0.15.2
 13. pip install transforms==0.1
 14. pip install Pillow==9.5.0
-15. python -m pip install certifi
+15. pip install openpyxl==3.1.2
+16. python -m pip install certifi
 
 ==============================
 ## [Model of Face Analysis and]

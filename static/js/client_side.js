@@ -14,143 +14,117 @@ $(document).ready(function(){
   // Memeriksa status unggahan gambar saat halaman dimuat
   checkImageUploaded();
 
+
+
   // Fungsi untuk memanggil API ketika tombol prediksi ditekan
   $("#prediksi_submit").click(function(e) {
     e.preventDefault();
+    
+    // Get File Gambar yg telah diupload pengguna
+    var file_data = $('#inputImage').prop('files')[0];     
+    var pics_data = new FormData();                  
+    pics_data.append('file', file_data);
 
-    // Cek kembali apakah ada gambar yang diunggah
-    var fileSelected = $('#inputImage').prop('files').length > 0;
-    if (!fileSelected) {
-      alert("Please upload images for analysis!");
-      return;
-    }
+    // Panggil API dengan timeout 1 detik (1000 ms)
 
+    setTimeout(function() {
+      try {
+            $.ajax({
+                url         : "/api/faceDetect",
+                type        : "POST",
+                data        : pics_data,
+                processData : false,
+                contentType : false,
+                success     : function(res){
+                    // Ambil hasil prediksi dan path gambar yang diprediksi dari API
+                    res_data_prediksi   = res['prediksi']
+                    res_gambar_prediksi = res['gambar_prediksi']
+                    res_data_rekomendasi = res['data_rekomendasi']
+                    
+                    // Tampilkan hasil prediksi ke halaman web
+                    generate_prediksi(res_data_prediksi, res_gambar_prediksi);
+                    generate_recomm(res_data_rekomendasi)
+              }
+            });
+        }
+        catch(e) {
+            // Jika gagal memanggil API, tampilkan error di console
+            console.log("Gagal !");
+            console.log(e);
+        } 
+    }, 1000)
+    
   });
 
-    // Fungsi untuk memeriksa apakah ada skin tone yang dipilih
-  function checkSkinToneSelected() {
-    var selectedValue = $('#selectSkinTone').val();
-    $("#prediksi_submit").prop("disabled", !selectedValue);
+
+  // -[Prediksi Model]---------------------------
+
+  // Fungsi untuk menampilkan hasil prediksi analysis pada wajah
+  function generate_prediksi(data_prediksi, image_prediksi) {
+    var str="";
+    
+    if(image_prediksi == "(none)") {
+      str += "<h3>Your Image is error</h3>";
+      str += "<img src='https://dummyimage.com/250x250/000/fff' alt='Gambar Produk'>";
+    }
+    else {
+      str += "<p>Your Problem on Face: <b>"+ data_prediksi +"</b></p>";
+      str += "<img src='" + image_prediksi + "'width=\"300\" height=\"300\" alt='Gambar Produk'>";
+    }
+    $("#outputAreaFace").html(str);
   }
 
-  // Memanggil fungsi checkSkinToneSelected saat ada perubahan pada pemilihan skin tone
-  $('#selectSkinTone').on("change", function() {
-    checkSkinToneSelected();
-  });
+  function generate_recomm(data_recom) {
+    var str="";
+    // Membuat list untuk data medications
+    var medications = data_recom[0]["Medication"].map(function(medication) {
+      return '<li>' + medication + '</li>';
+    });
+    var listMed = medications.join('')
 
-  // Memeriksa status pemilihan skin tone saat halaman dimuat
-  checkSkinToneSelected();
-
-  // Fungsi untuk memanggil API ketika tombol prediksi ditekan
-  $("#prediksi_submit").click(function(e) { 
-    e.preventDefault();
-
-    // Cek kembali apakah ada skin tone yang dipilih
-    var selectedValue = $('#selectSkinTone').val();
-    if (!selectedValue) {
-      alert("Please choose your skin tone first!");
-      return;
+    // Membuat list untuk data ingredients
+    var ingredients = data_recom[0]["Skincare Ingredients"].map(function(ingredient) {
+      return '<li>' + ingredient + '</li>';
+    });
+    var listIngr = ingredients.join('')
+    
+    if(data_recom == "(none)") {
+      str +=  '<td class="text-start" style="border-right: 2px solid #3D405B;">'
+      str +=  '<ul style="text-align: justify;">'
+      str +=  '<li>Ketoconazole cream Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>'
+      str +=  '<li>Clotrimazole cream</li>'
+      str +=  '<li>Miconazole cream</li>'
+      str +=  '<li>Selenium sulfide shampoo</li>'
+      str +=  '<li>Nystatin powder</li>'
+      str +=  '</ul>'
+      str +=  '</td>'
+      str +=  '<td class="no-bullet text-start">'
+      str +=  '<ul style="text-align: justify;">'
+      str +=  '<li>Salicylic acid</li>'
+      str +=  '<li>Tea tree oil</li>'
+      str +=  '<li>Niacinamide</li>'
+      str +=  '<li>Zinc pyrithione</li>'
+      str +=  '<li>Aloe vera</li>'
+      str +=  '</ul>'
+      str +=  '</td>'
+      
+    }
+    else {
+      str +=  '<td class="text-start" style="border-right: 2px solid #3D405B;">'
+      str +=  '<ul style="text-align: justify;">'
+      str +=  listMed
+      str +=  '</ul>'
+      str +=  '</td>'
+      str +=  '<td class="text-start">'
+      str +=  '<ul style="text-align: justify;">'
+      str +=  listIngr
+      str +=  '</ul>'
+      str +=  '</td>'
     }
 
-    // Fungsi untuk memanggil API ketika tombol prediksi ditekan
-    $("#prediksi_submit").click(function(e) {
-      e.preventDefault();
-      
-      // Get File Gambar yg telah diupload pengguna
-      var file_data = $('#inputImage').prop('files')[0];   
-      var select_data = $('#inputImage').prop('files')[1];   
-      var pics_data = new FormData();                  
-      pics_data.append('file', file_data);
-      pics_data.append('selectSkinTone', select_data)
 
-      var selectElement = document.getElementById("selectSkinTone");
-      var selectedValue = selectElement.value;
-  
-      // Panggil API dengan timeout 1 detik (1000 ms)
-      setTimeout(function() {
-        try {
-              $.ajax({
-                  url : "/skinTone",
-                  type : "POST",
-                  data : { value: selectedValue },
-                  success: function(response) {
-                    // Handle the response from the server
-                    console.log("Succes");
-                  },
-                  error: function(xhr, status, error) {
-                    // Handle the error
-                    console.log(error);
-                  }
-              });
-          }
-          catch(e) {
-              // Jika gagal memanggil API, tampilkan error di console
-              console.log("Gagal !");
-              console.log(e);
-          } 
-      }, 1000)
+    $("#outputRecomm").html(str);
+  }
 
-      setTimeout(function() {
-        try {
-              $.ajax({
-                  url         : "/api/faceDetect",
-                  type        : "POST",
-                  data        : pics_data,
-                  processData : false,
-                  contentType : false,
-                  success     : function(res){
-                      // Ambil hasil prediksi dan path gambar yang diprediksi dari API
-                      res_data_prediksi   = res['prediksi']
-                      res_gambar_prediksi = res['gambar_prediksi']
-                      res_data_rekomendasi = res['data_rekomendasi']
-                      
-                      // Tampilkan hasil prediksi ke halaman web
-                      generate_prediksi(res_data_prediksi, res_gambar_prediksi);
-                      // Rekomennya masih belum
-                      generate_recomenn(res_data_rekomendasi)
-                }
-              });
-          }
-          catch(e) {
-              // Jika gagal memanggil API, tampilkan error di console
-              console.log("Gagal !");
-              console.log(e);
-          } 
-      }, 1000)
-      
-    })
-
-  });
-
-    // -[Prediksi Model]---------------------------
-
-    // Fungsi untuk menampilkan hasil prediksi analysis pada wajah
-    function generate_prediksi(data_prediksi, image_prediksi) {
-      var str="";
-      
-      if(image_prediksi == "(none)") {
-        str += "<h3>Your Image is error</h3>";
-        str += "<img src='https://dummyimage.com/250x250/000/fff' alt='Gambar Produk'>";
-      }
-      else {
-        str += "<p>Your Problem on Face: <b>"+ data_prediksi +"</b></p>";
-        str += "<img src='" + image_prediksi + "'width=\"300\" height=\"300\" alt='Gambar Produk'>";
-      }
-      $("#outputAreaFace").html(str);
-    }
-
-    // Fungsi untuk menampilkan hasil prediksi analysis pada wajah
-    function generate_recomenn(data_rekomendasi) {
-      var str="";
-      if(data_rekomendasi[0]["Product_url"] == "(none)") {
-        str += "<h3>Your Image is error</h3>";
-        str += "<img src='https://dummyimage.com/250x250/000/fff' alt='Gambar Produk'>";
-      }
-      else {
-        str += "<p><b>"+ data_rekomendasi[0]["Product"] +"</b></p>";
-        str += "<img src='" + data_rekomendasi[0]["Product_url"] + "'width=\"250\" height=\"250\" alt='Gambar Produk'>";
-      }
-      $("#outputAreaProduk").html(str);
-    }    
   })
   

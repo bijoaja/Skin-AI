@@ -7,12 +7,12 @@ import torchvision.transforms as transforms
 import torch.nn as nn
 from torch.autograd import Variable
 import torch.nn.functional as F
-import pickle
 import pandas as pd
-from sklearn.linear_model import LogisticRegression
-from sklearn.preprocessing import OneHotEncoder
 from PIL import Image
 import numpy as np
+# import pickle
+# from sklearn.linear_model import LogisticRegression
+# from sklearn.preprocessing import OneHotEncoder
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -33,7 +33,7 @@ model = model_ft.to(device)
 
 hasil_prediksi  = '(none)'
 gambar_prediksi = '(none)'
-data_recomm = []
+data_recomm = '(none)'
 skinntone = '(none)'
 
 app.config['UPLOAD_PATH'] = '/static/images/results/'
@@ -150,19 +150,8 @@ def apiDeteksi():
         else:
             faceClasses = 'Normal / Not Detect'
         
-        skinT = selected_value(skinntone)
-        recomm = recommendation(faceClasses, skinT)
+        data_recomm = medication(faceClasses)
         
-        for index, row in recomm.iterrows():
-            # Buat objek baru dan tambahkan nilai dari setiap kolom
-            obj = {
-                'Product': row['Product'],
-                'Product_Url': row['Product_Url']
-            }
-            # Tambahkan objek ke dalam array_of_objects
-            data_recomm.append(obj)
-        
-    print("From Api Detect: ",obj)
     # Return hasil prediksi dengan format JSON
     return jsonify({
         "prediksi": faceClasses,
@@ -170,64 +159,22 @@ def apiDeteksi():
         "data_rekomendasi": data_recomm
     })
 
-@app.route("/skinTone", methods=['POST'])
-def skinTone():
-    global skinntone
-    skinntone = request.form.get('value')
-    return skinntone
-    
-def selected_value(value):
-    value = skinntone
-    return value
+# For Read Data Medication
+def medication(skin_condition):
+    # global data_recomm
+    df_pd = pd.read_excel("Rekomendasi Obat Penyakit pada Wajah.xlsx", engine="openpyxl")
+    data_recomm = df_pd[df_pd["Skin Condition"] == skin_condition]
+    data_recomm["Medication"] = data_recomm["Medication"].apply(lambda x: x.split('\n'))
+    data_recomm["Skincare Ingredients"] = data_recomm["Skincare Ingredients"].apply(lambda x: x.split('\n'))
+    return data_recomm.to_dict(orient='records')
 
-# Recommendation Product
-def recommendation(skintype, skintone):  # sourcery skip: avoid-builtin-shadow
-    # Load the dataframe
-    df = pd.read_csv('data_product_recommendation.csv', index_col=[0])
-    
-    # Create Condition For Cek skintype & skintone already exist in dataset
-    ## PROCESS
-    # Filter the dataframe based on the given features
-    ddf = df[(df['Skin_Type'] == skintype) & (df['Skin_Tone'] == skintone)]
 
-    # Encode categorical features
-    encoder = OneHotEncoder(sparse=False)
-    encoded_features = encoder.fit_transform(df[['Skin_Type', 'Skin_Tone']])
-
-    # Prepare training data
-    X_train = encoded_features
-    y_train = df['Good_Stuff']
-
-    # Fit the model with training data
-    modelL.fit(X_train, y_train)
-
-    # Make predictions using the fitted model
-    encoded_new_data = encoder.transform(ddf[['Skin_Type', 'Skin_Tone']])
-    prediksi = modelL.predict(encoded_new_data)
-
-    # Use the prediction to recommend products
-    recommendations = ddf[ddf['Rating_Stars'].notnull()]
-    recommendations['Prediction'] = prediksi
-    recommendations = recommendations.sort_values(by=['Prediction', 'Rating_Stars', 'Price', 'Good_Stuff'], ascending=[False, False, True, False])
-
-    # Create a new dataframe and reset the index from 1
-    result = pd.DataFrame(recommendations[['Product', 'Brand', 'Category', 'Price', 'Good_Stuff', 'Ingredients', 'Rating_Stars', 'Product_Url']]).reset_index(drop=True)
-    result.index += 1
-
-    # Remove duplicate data and filter by ingredients
-    result = result.drop_duplicates(subset="Product")
-    filter = result["Ingredients"] != "No Info"
-    result = result[filter]
-    
-    return result
-		
 
 if __name__ == '__main__':
     # Load model yang telah ditraining
     model.load_state_dict(torch.load('model_resnet18.pth'))
     model.to(device)
     
-    modelL = pickle.load(open("logisticRegression.pkl", "rb"))
 
 
 	# Run Flask di localhost 

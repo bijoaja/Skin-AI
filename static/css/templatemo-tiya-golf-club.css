@@ -8,7 +8,7 @@ https://templatemo.com/tm-587-tiya-golf-club
 
 
 /*---------------------------------------
-  CUSTOM PROPERTIES ( VARIABLES )             
+  CUSTOM PROPERTIES ( VARIABLES )
 -----------------------------------------*/
 :root {
   --white-color:                  #ffffff;
@@ -44,12 +44,12 @@ https://templatemo.com/tm-587-tiya-golf-club
 
 body {
   background-color: var(--white-color);
-  font-family: var(--body-font-family); 
+  font-family: var(--body-font-family);
 }
 
 
 /*---------------------------------------
-  TYPOGRAPHY               
+  TYPOGRAPHY
 -----------------------------------------*/
 
 h2,
@@ -108,7 +108,7 @@ ul li {
   font-weight: var(--font-weight-normal);
 }
 
-a, 
+a,
 button {
   touch-action: manipulation;
   transition: all 0.3s;
@@ -131,7 +131,7 @@ strong {
 
 
 /*---------------------------------------
-  SECTION               
+  SECTION
 -----------------------------------------*/
 .section-bg {
   background-color: var(--section-bg-color);
@@ -159,7 +159,7 @@ strong {
 
 
 /*---------------------------------------
-  ANIMATED HEADLINE               
+  ANIMATED HEADLINE
 -----------------------------------------*/
 .cd-words-wrapper {
   display: inline-block;
@@ -357,7 +357,7 @@ strong {
 
 
 /*---------------------------------------
-  CUSTOM BUTTON               
+  CUSTOM BUTTON
 -----------------------------------------*/
 .custom-btn {
   background: var(--custom-btn-bg-color);
@@ -404,7 +404,7 @@ strong {
 
 
 /*---------------------------------------
-  NAVIGATION BAR & OFFCANVAS              
+  NAVIGATION BAR & OFFCANVAS
 -----------------------------------------*/
 .offcanvas {
   background-color: var(--primary-color);
@@ -500,7 +500,7 @@ strong {
   padding-bottom: 15px;
 }
 
-.navbar-nav .nav-link.active, 
+.navbar-nav .nav-link.active,
 .navbar-nav .nav-link:hover {
   color: var(--link-hover-color);
 }
@@ -538,9 +538,9 @@ strong {
   position: relative;
 }
 
-.navbar .dropdown-item.active, 
+.navbar .dropdown-item.active,
 .navbar .dropdown-item:active,
-.navbar .dropdown-item:focus, 
+.navbar .dropdown-item:focus,
 .navbar .dropdown-item:hover {
   background: transparent;
   color: var(--link-hover-color);
@@ -640,7 +640,7 @@ strong {
 
 
 /*---------------------------------------
-  HERO        
+  HERO
 -----------------------------------------*/
 .hero-section {
   background-image: url('../images/background1.jpg');
@@ -692,7 +692,7 @@ strong {
 
 
 /*---------------------------------------
-  BACKGROUND IMAGE SECTION        
+  BACKGROUND IMAGE SECTION
 -----------------------------------------*/
 .section-bg-image {
   background-image: url('../images/frederik-rosar-NDSZcCfnsbY-unsplash.jpg');
@@ -747,7 +747,7 @@ strong {
 
 
 /*---------------------------------------
-  ABOUT SECTOIN              
+  ABOUT SECTOIN
 -----------------------------------------*/
 .about-section {
   padding-bottom: 70px;
@@ -795,7 +795,7 @@ strong {
 
 
 /*---------------------------------------
-  CUSTOM BLOCK              
+  CUSTOM BLOCK
 -----------------------------------------*/
 .custom-block {
   border-radius: var(--border-radius-medium);
@@ -900,7 +900,7 @@ strong {
 
 
 /*---------------------------------------
-  EVENTS SECTION            
+  EVENTS SECTION
 -----------------------------------------*/
 .events-section.section-bg .container > .row {
   margin-right: 5px;
@@ -932,22 +932,41 @@ strong {
 
 
 /*---------------------------------------
-  MEMBERSHIP SECTION            
+  MEMBERSHIP SECTION
 -----------------------------------------*/
 .membership-section .container {
   position: relative;
   z-index: 2;
 }
 
+.table {
+  border-radius: var(--border-radius-medium);
+}
+.table-container {
+  background: white;
+  border: 2px solid #3D405B;
+  border-radius: var(--border-radius-medium);
+  height: 350px;
+  overflow: hidden; /* Menyembunyikan konten tabel yang melampaui ketinggian maksimum */
+  border-collapse: separate; 
+  border-spacing: 1;
+}
+
+.table {
+  width: 100%;
+  height: 350px;
+  
+}
+
 .table-responsive {
   border-radius: var(--border-radius-medium);
 }
 
-.table-responsive tbody, 
-.table-responsive td, 
-.table-responsive tfoot, 
-.table-responsive th, 
-.table-responsive thead, 
+.table-responsive tbody,
+.table-responsive td,
+.table-responsive tfoot,
+.table-responsive th,
+.table-responsive thead,
 .table-responsive tr {
   border: 0;
 }
@@ -961,8 +980,28 @@ strong {
   padding: 22px 16px !important;
 }
 
+.table-responsive tbody{
+  border-radius: var(--border-radius-medium);
+}
+
+
+.table-responsive tbody th {
+  border-radius: var(--border-radius-medium);
+  vertical-align: middle;
+}
+
+.numbered-list ul {
+  list-style-type: decimal;
+  padding-left: 0;
+}
+
+.no-bullet ul{
+  list-style-type: none;
+  padding-left: 0;
+}
+
 .table-responsive tbody tr:nth-child(even) {
-  background-color: var(--section-bg-color);
+  background-color: var(--white-color);
 }
 
 .table>:not(caption)>*>* {
@@ -988,9 +1027,13 @@ strong {
   height: 100px;
 }
 
+.star {
+  color: gold;
+  font-size: 24px;
+}
 
 /*---------------------------------------
-  CONTACT               
+  CONTACT
 -----------------------------------------*/
 .contact-form .form-floating>textarea {
   border-radius: var(--border-radius-medium);
@@ -1038,7 +1081,7 @@ strong {
 
 
 /*---------------------------------------
-  SITE FOOTER            
+  SITE FOOTER
 -----------------------------------------*/
 body {
   background: #fbfbfd;
@@ -1219,17 +1262,17 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid black;
+  border: 2px solid #3D405B;
   padding: 1em;
   padding-bottom: 3em;
-  border-radius: 10px;
+  border-radius: var(--border-radius-medium);
 
 }
 
 .box img {
   max-width: 100%;
   height: auto;
-  border-radius: 10px;
+  border-radius: var(--border-radius-medium);
 }
 
 .new_footer_top .footer_bg {
@@ -1297,7 +1340,7 @@ background-size:100%;
 
 
 /*---------------------------------------
-  CUSTOM FORM               
+  CUSTOM FORM
 -----------------------------------------*/
 .custom-form .form-control {
   border-radius: var(--border-radius-large);
@@ -1355,7 +1398,7 @@ background-size:100%;
 
 
 /*---------------------------------------
-  SOCIAL ICON               
+  SOCIAL ICON
 -----------------------------------------*/
 .social-icon {
   margin: 0;
@@ -1389,7 +1432,7 @@ background-size:100%;
 
 
 /*---------------------------------------
-  RESPONSIVE STYLES               
+  RESPONSIVE STYLES
 -----------------------------------------*/
 @media screen and (max-width: 991px) {
   h1 {
@@ -1420,7 +1463,7 @@ background-size:100%;
     padding-top: 50px;
     padding-bottom: 50px;
   }
-  
+
   .navbar {
     background-color: var(--secondary-color);
   }

@@ -1,12 +1,3 @@
-/*
-
-TemplateMo 587 Tiya Golf Club
-
-https://templatemo.com/tm-587-tiya-golf-club
-
-*/
-
-
 /*---------------------------------------
   CUSTOM PROPERTIES ( VARIABLES )
 -----------------------------------------*/
@@ -943,18 +934,17 @@ strong {
   border-radius: var(--border-radius-medium);
 }
 .table-container {
-  background: white;
   border: 2px solid #3D405B;
+  background: white;
   border-radius: var(--border-radius-medium);
-  height: 350px;
+  height: auto;
   overflow: hidden; /* Menyembunyikan konten tabel yang melampaui ketinggian maksimum */
-  border-collapse: separate; 
-  border-spacing: 1;
 }
 
 .table {
+  margin: 0px;
   width: 100%;
-  height: 350px;
+  height: auto;
   
 }
 
@@ -988,6 +978,12 @@ strong {
 .table-responsive tbody th {
   border-radius: var(--border-radius-medium);
   vertical-align: middle;
+}
+
+.table-responsive tbody td ul li {
+  /* font-weight: bold; */
+  font-size: 16px;
+  color: black;
 }
 
 .numbered-list ul {
@@ -1257,14 +1253,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .box {
   width: 350px;
-  height: 350px;
+  height: auto;
   background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   border: 2px solid #3D405B;
   padding: 1em;
-  padding-bottom: 3em;
+  padding-bottom: 1.5em;
   border-radius: var(--border-radius-medium);
 
 }

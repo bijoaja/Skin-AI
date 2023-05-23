@@ -10,6 +10,8 @@ import torch.nn.functional as F
 import pandas as pd
 from PIL import Image
 import numpy as np
+# from pathlib import Path
+import shutil
 # import pickle
 # from sklearn.linear_model import LogisticRegression
 # from sklearn.preprocessing import OneHotEncoder
@@ -24,8 +26,19 @@ face_classes = ['Dermatitis perioral', 'Eksim', 'Pustula', 'acne nodules', 'blac
 # Check if GPU is available
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 model_ft = models.resnet18(pretrained=True)
+
+# Modify the fully connected layer
 num_ftrs = model_ft.fc.in_features
 model_ft.fc = nn.Linear(num_ftrs, len(face_classes))
+
+# Enable training of all parameters
+for param in model_ft.parameters():
+    param.requires_grad = True
+for param in model_ft.layer2.parameters():
+    param.requires_grad = False
+for param in model_ft.layer3.parameters():
+    param.requires_grad = True
+
 model = model_ft.to(device)
 ##### End Model Resnet18 ####
 
@@ -111,12 +124,13 @@ def predict2(uploaded_file_path, model, topk=5):
     
     # TODO: Implement the code to predict the class from an image file
     img = Image.open(uploaded_file_path)
+    img.convert("RGB")
+
     
     img = process_image(img)
     
     # Convert 2D image to 1D vector
     img = np.expand_dims(img, 0)
-    
     
     img = torch.from_numpy(img)
     
@@ -145,31 +159,39 @@ def apiDeteksi():
     uploaded_file = request.files['file']
     filename      = secure_filename(uploaded_file.filename)
     cekEks = filename.split('.')
-    print(cekEks)
     # Set/mendapatkan extension dan path dari file yg diupload
     gambar_prediksi = f'./static/images/results/{filename}'
 
-    if (filename != '') and (cekEks[1] == 'jpg'):
-    	
+    if filename != '':# and cekEks[1].lower() in ['jpg', 'jpeg']:
+
         # Simpan Gambar
+        
         save_path = os.path.join("static/images/results/", filename)
         uploaded_file.save(save_path)
+        
+        # Conversi file ke jpg
+        filename, extension = os.path.splitext(save_path)
+        new_path = f"{filename}.jpg"
+        shutil.move(gambar_prediksi, new_path)
 
-        probs, classes = predict2(gambar_prediksi, model_ft.to(device))
+        probs, classes = predict2(new_path, model_ft.to(device))
         probsMax = max(probs)
+        for i in range(len(probs)):
+            print(face_classes[classes[i]],probs[i])
+
         if probsMax>0.9:
             faceClasses = face_classes[classes[probs.index(probsMax)]]
         else:
             faceClasses = 'Normal / Not Detect'
 
     else:
-        faceClasses = "Upload JPG file"
+        faceClasses = "Upload jpeg file"
     data_recomm = medication(faceClasses)
 
     # Return hasil prediksi dengan format JSON
     return jsonify({
         "prediksi": faceClasses,
-        "gambar_prediksi" : gambar_prediksi,
+        "gambar_prediksi" : new_path,
         "data_rekomendasi": data_recomm
     })
 

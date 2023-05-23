@@ -134,19 +134,19 @@
 
                                     <ul class="social-icon">
                                         <li class="social-icon-item">
-                                            <a href="{{memberData[loop.index0].linkedin}}" class="social-icon-link bi-linkedin" target="_blank"></a>
+                                            <a href="{{member.linkedin}}" class="social-icon-link bi-linkedin" target="_blank"></a>
                                         </li>
 
                                         <li class="social-icon-item">
-                                            <a href="{{memberData[loop.index0].github}}" target="_blank" class="social-icon-link bi-github"></a>
+                                            <a href="{{member.github}}" target="_blank" class="social-icon-link bi-github"></a>
                                         </li>
                                     </ul>
                                 </div>
 
                                 <div class="member-block-info d-flex align-items-center">
-                                    <h4>{{memberData[loop.index0].name}}</h4>
+                                    <h4>{{member.name}}</h4>
 
-                                    <p class="ms-auto">{{memberData[loop.index0].position}}</p>
+                                    <p class="ms-auto">{{member.position}}</p>
                                 </div>
                             </div>
                         </div>

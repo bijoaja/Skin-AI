@@ -45,13 +45,13 @@
 ==============================
 
 * model_resnet18.pth
-https://drive.google.com/file/d/1aRURp86D1qd5VgMkxG4o7x8MN8I3rlu3/view?usp=share_link
+https://drive.google.com/file/d/1eC_3nMsp8K44LD2GRV0AV_lGeEfaMO48/view?usp=share_link
 
 * Modelling of Face Analysis
-https://drive.google.com/file/d/1XFnef8kKtDl8Ht6WbBFeuBU-SKMBFJxE/view?usp=share_link
+https://colab.research.google.com/drive/1Dr8aS5vilaYQkyTMNWcqanXlSQPey2JZ?usp=sharing
 
-* Dataset Recomendation Skincare
-https://drive.google.com/file/d/1znBEhY0ZNkSKI4LHzyhOFW93QweBuEhu/view?usp=share_link
+* Data Medication Recomendation
+https://drive.google.com/file/d/10xDsn-6QN7RsOLlRZ_t-lQ76DaL8ki4A/view?usp=share_link
 
 
 ==========================

@@ -10,18 +10,12 @@ import torch.nn.functional as F
 import pandas as pd
 from PIL import Image
 import numpy as np
-# from pathlib import Path
 import shutil
-# import pickle
-# from sklearn.linear_model import LogisticRegression
-# from sklearn.preprocessing import OneHotEncoder
 
 app = Flask(__name__, static_url_path='/static')
 
 ##### Model Resnet18 ####
 face_classes = ['Dermatitis perioral', 'Eksim', 'Pustula', 'acne nodules', 'blackhead', 'Flek hitam', 'folikulitis', 'fungal acne', 'herpes', 'kutil filiform', 'milia', 'panu', 'rosacea', 'whitehead']
-
-# blackhead, flek hitam, 
 
 # Check if GPU is available
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -158,14 +152,12 @@ def apiDeteksi():
     # Get File Gambar yg telah diupload pengguna
     uploaded_file = request.files['file']
     filename      = secure_filename(uploaded_file.filename)
-    cekEks = filename.split('.')
     # Set/mendapatkan extension dan path dari file yg diupload
     gambar_prediksi = f'./static/images/results/{filename}'
 
-    if filename != '':# and cekEks[1].lower() in ['jpg', 'jpeg']:
+    if filename != '':
 
         # Simpan Gambar
-        
         save_path = os.path.join("static/images/results/", filename)
         uploaded_file.save(save_path)
         
@@ -174,10 +166,13 @@ def apiDeteksi():
         new_path = f"{filename}.jpg"
         shutil.move(gambar_prediksi, new_path)
 
+        # Predict Image
         probs, classes = predict2(new_path, model_ft.to(device))
         probsMax = max(probs)
-        for i in range(len(probs)):
-            print(face_classes[classes[i]],probs[i])
+        
+        # Cek Akurasi dan class
+        # for i in range(len(probs)):
+        #     print(face_classes[classes[i]],probs[i])
 
         if probsMax>0.9:
             faceClasses = face_classes[classes[probs.index(probsMax)]]
@@ -199,7 +194,6 @@ if __name__ == '__main__':
     # Load model yang telah ditraining
     model.load_state_dict(torch.load('model_resnet18.pth'))
     model.to(device)
-    
 
 	# Run Flask di localhost 
     app.run(host='127.0.0.1', port=5001, debug=True)

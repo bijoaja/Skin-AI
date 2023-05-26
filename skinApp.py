@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request,jsonify
+from flask import Flask,render_template,request,jsonify, Response
 import os
 from werkzeug.utils import secure_filename
 import torch
@@ -7,6 +7,7 @@ import torchvision.transforms as transforms
 import torch.nn as nn
 from torch.autograd import Variable
 import torch.nn.functional as F
+from modelResnet import *
 import pandas as pd
 from PIL import Image
 import numpy as np
@@ -19,25 +20,27 @@ face_classes = ['Dermatitis perioral', 'Eksim', 'Pustula', 'acne nodules', 'blac
 
 # Check if GPU is available
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-model_ft = models.resnet18(pretrained=True)
+# model_ft = models.resnet18(pretrained=True)
 
 # Modify the fully connected layer
-num_ftrs = model_ft.fc.in_features
-model_ft.fc = nn.Linear(num_ftrs, len(face_classes))
+# num_ftrs = model_ft.fc.in_features
+# model_ft.fc = nn.Linear(num_ftrs, len(face_classes))
 
 # Enable training of all parameters
-for param in model_ft.parameters():
-    param.requires_grad = True
-for param in model_ft.layer2.parameters():
-    param.requires_grad = False
-for param in model_ft.layer3.parameters():
-    param.requires_grad = True
-
-model = model_ft.to(device)
+# for param in model_ft.parameters():
+#     param.requires_grad = True
+# for param in model_ft.layer2.parameters():
+#     param.requires_grad = False
+# for param in model_ft.layer3.parameters():
+#     param.requires_grad = True
+num_classes = 14  # Change this to the desired number of output classes
+model = ResNet(num_classes)
 ##### End Model Resnet18 ####
 
 ## Default Data ##
-hasil_prediksi  = '(none)'
+faceClasses  = '(none)'
+diagnosis = '(none)'
+akurasi = '(none)'
 gambar_prediksi = '(none)'
 data_recomm = '(none)'
 skinntone = '(none)'
@@ -167,18 +170,19 @@ def apiDeteksi():
         shutil.move(gambar_prediksi, new_path)
 
         # Predict Image
-        probs, classes = predict2(new_path, model_ft.to(device))
+        probs, classes = predict2(new_path, model)
         probsMax = max(probs)
         
         # Cek Akurasi dan class
-        # for i in range(len(probs)):
-        #     print(face_classes[classes[i]],probs[i])
+        for i in range(len(probs)):
+            print(face_classes[classes[i]],probs[i])
 
         if probsMax>0.9:
             faceClasses = face_classes[classes[probs.index(probsMax)]]
         else:
             faceClasses = 'Normal / Not Detect'
-
+            diagnosis = face_classes[classes[probs.index(probsMax)]]
+        akurasi = "{:.2f}%".format(probsMax*100)
     else:
         faceClasses = "Upload jpeg file"
     data_recomm = medication(faceClasses)
@@ -186,14 +190,26 @@ def apiDeteksi():
     # Return hasil prediksi dengan format JSON
     return jsonify({
         "prediksi": faceClasses,
+        "diagnosis": diagnosis,
+        "akurasi": akurasi,
         "gambar_prediksi" : new_path,
         "data_rekomendasi": data_recomm
     })
 
+
 if __name__ == '__main__':
     # Load model yang telah ditraining
-    model.load_state_dict(torch.load('model_resnet18.pth'))
-    model.to(device)
+    # model.load_state_dict(torch.load('best_model.pth'))
+    # model.to(device)
+    try:
+        model.load_state_dict(torch.load('best_model.pth'))
+    except RuntimeError as error:
+        if 'Attempting to deserialize object on a CUDA device but torch.cuda.is_available() is False' in str(error):
+            model.load_state_dict(torch.load('best_model.pth', map_location=torch.device('cpu')))
+        else:
+            raise error
+
+    
 
 	# Run Flask di localhost 
     app.run(host='127.0.0.1', port=5001, debug=True)

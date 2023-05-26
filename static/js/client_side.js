@@ -15,7 +15,6 @@ $(document).ready(function(){
   checkImageUploaded();
 
 
-
   // Fungsi untuk memanggil API ketika tombol prediksi ditekan
   $("#prediksi_submit").click(function(e) {
     e.preventDefault();
@@ -37,12 +36,14 @@ $(document).ready(function(){
                 contentType : false,
                 success     : function(res){
                     // Ambil hasil prediksi dan path gambar yang diprediksi dari API
-                    res_data_prediksi   = res['prediksi']
-                    res_gambar_prediksi = res['gambar_prediksi']
+                    res_data_prediksi    = res['prediksi']
+                    res_data_diagnosis   = res['diagnosis']
+                    res_data_akurasi     = res['akurasi']
+                    res_gambar_prediksi  = res['gambar_prediksi']
                     res_data_rekomendasi = res['data_rekomendasi']
                     
                     // Tampilkan hasil prediksi ke halaman web
-                    generate_prediksi(res_data_prediksi, res_gambar_prediksi);
+                    generate_prediksi(res_data_prediksi, res_data_diagnosis, res_data_akurasi, res_gambar_prediksi);
                     generate_recomm(res_data_rekomendasi)
               }
             });
@@ -60,7 +61,7 @@ $(document).ready(function(){
   // -[Prediksi Model]---------------------------
 
   // Fungsi untuk menampilkan hasil prediksi analysis pada wajah
-  function generate_prediksi(data_prediksi, image_prediksi) {
+  function generate_prediksi(data_prediksi, data_diagnosis, data_akurasi, image_prediksi) {
     var str="";
     
     if(image_prediksi == "(none)") {
@@ -71,15 +72,21 @@ $(document).ready(function(){
       str += "<p>Your page Error: <b>"+ data_prediksi +"</b></p>";
       str += "<img src='https://dummyimage.com/250x250/000/fff' alt='Gambar Produk'>";
     }
+    else if(data_prediksi == "Normal / Not Detect"){
+      str += "<p><b>"+ data_prediksi +"</b></p>";
+      str += "<p>Diagnosis: <b>"+ data_diagnosis +"</b></p>";
+      str += "<p>Accuration: <b>"+ data_akurasi +"</b></p>";
+      str += "<img src='" + image_prediksi + "'width=\"300\" height=\"300\" alt='Gambar Produk'>";
+    }
     else {
       str += "<p>Your Problem on Face: <b>"+ data_prediksi +"</b></p>";
+      str += "<p>Accuration: <b>"+ data_akurasi +"</b></p>";
       str += "<img src='" + image_prediksi + "'width=\"300\" height=\"300\" alt='Gambar Produk'>";
     }
     $("#outputAreaFace").html(str);
   }
 
   function generate_recomm(data_recom) {
-    console.log(data_recom)
     var str="";
     // Membuat list untuk data medications
     var medications = data_recom[0]["Medication"].map(function(medication) {

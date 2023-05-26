@@ -1,10 +1,8 @@
-from flask import Flask,render_template,request,jsonify, Response
+from flask import Flask,render_template,request,jsonify
 import os
 from werkzeug.utils import secure_filename
 import torch
-import torchvision.models as models
 import torchvision.transforms as transforms
-import torch.nn as nn
 from torch.autograd import Variable
 import torch.nn.functional as F
 from modelResnet import *
@@ -20,25 +18,13 @@ face_classes = ['Dermatitis perioral', 'Eksim', 'Pustula', 'acne nodules', 'blac
 
 # Check if GPU is available
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-# model_ft = models.resnet18(pretrained=True)
 
-# Modify the fully connected layer
-# num_ftrs = model_ft.fc.in_features
-# model_ft.fc = nn.Linear(num_ftrs, len(face_classes))
-
-# Enable training of all parameters
-# for param in model_ft.parameters():
-#     param.requires_grad = True
-# for param in model_ft.layer2.parameters():
-#     param.requires_grad = False
-# for param in model_ft.layer3.parameters():
-#     param.requires_grad = True
 num_classes = 14  # Change this to the desired number of output classes
 model = ResNet(num_classes)
 ##### End Model Resnet18 ####
 
 ## Default Data ##
-faceClasses  = '(none)'
+faceClasses  = 'Normal / Not Detect'
 diagnosis = '(none)'
 akurasi = '(none)'
 gambar_prediksi = '(none)'
@@ -95,7 +81,9 @@ def home():
             "linkedin":"https://www.linkedin.com/in/ritadwipangesti"
         },
     ]
-    return render_template("index.html", memberData=member)
+    default_recom = medication("Normal / Not Detect")
+    print(default_recom)
+    return render_template("index.html", memberData=member, default_recom=default_recom)
 
 # Proses image
 def process_image(image):
@@ -177,11 +165,11 @@ def apiDeteksi():
         for i in range(len(probs)):
             print(face_classes[classes[i]],probs[i])
 
-        if probsMax>0.9:
+        if probsMax>0.85:
             faceClasses = face_classes[classes[probs.index(probsMax)]]
         else:
             faceClasses = 'Normal / Not Detect'
-            diagnosis = face_classes[classes[probs.index(probsMax)]]
+        diagnosis = face_classes[classes[probs.index(probsMax)]]
         akurasi = "{:.2f}%".format(probsMax*100)
     else:
         faceClasses = "Upload jpeg file"
@@ -199,8 +187,6 @@ def apiDeteksi():
 
 if __name__ == '__main__':
     # Load model yang telah ditraining
-    # model.load_state_dict(torch.load('best_model.pth'))
-    # model.to(device)
     try:
         model.load_state_dict(torch.load('best_model.pth'))
     except RuntimeError as error:

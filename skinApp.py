@@ -19,7 +19,7 @@ face_classes = ['Dermatitis perioral', 'Eksim', 'Pustula', 'acne nodules', 'blac
 # Check if GPU is available
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-num_classes = 14  # Change this to the desired number of output classes
+num_classes = 14
 model = ResNet(num_classes)
 ##### End Model Resnet18 ####
 
@@ -188,10 +188,10 @@ def apiDeteksi():
 if __name__ == '__main__':
     # Load model yang telah ditraining
     try:
-        model.load_state_dict(torch.load('best_model.pth'))
+        model.load_state_dict(torch.load('resnet18.pth'))
     except RuntimeError as error:
         if 'Attempting to deserialize object on a CUDA device but torch.cuda.is_available() is False' in str(error):
-            model.load_state_dict(torch.load('best_model.pth', map_location=torch.device('cpu')))
+            model.load_state_dict(torch.load('resnet18.pth', map_location=torch.device('cpu')))
         else:
             raise error
 

@@ -9,13 +9,12 @@
 - joblib      1.2.0
 - pandas      2.0.1
 - numpy       1.24.3
-- matplotlib  3.7.1
-- sklearn     1.2.2
 - torch       2.0.1
 - torchvision 0.15.2
 - transforms  0.1
 - Pillow      9.5.0
 - openpyxl    3.1.2
+- shutils 0.1.0
 - ssl
 
 =======================================
@@ -30,14 +29,13 @@
 6. pip install joblib==1.2.0
 7. pip install pandas==2.0.1
 8. pip install numpy==1.24.3
-9. pip install matplotlib==3.7.1
-10. pip install scikit-learn==1.2.2
-11. pip install torch==2.0.1
-12. pip install torchvision==0.15.2
-13. pip install transforms==0.1
-14. pip install Pillow==9.5.0
-15. pip install openpyxl==3.1.2
-16. python -m pip install certifi
+9. pip install torch==2.0.1
+10. pip install torchvision==0.15.2
+11. pip install transforms==0.1
+12. pip install Pillow==9.5.0
+13. pip install openpyxl==3.1.2
+14. pip install shutils==0.1.0
+15. python -m pip install certifi
 
 ==============================
 ## [Model of Face Analysis and]
@@ -45,13 +43,13 @@
 ==============================
 
 * model_resnet18.pth
-https://drive.google.com/file/d/1eC_3nMsp8K44LD2GRV0AV_lGeEfaMO48/view?usp=share_link
+https://drive.google.com/file/d/1NxYgedIVIrrWW2UtqR03tECHyNYnXL0S/view?usp=drive_link
 
 * Modelling of Face Analysis
-https://colab.research.google.com/drive/1Dr8aS5vilaYQkyTMNWcqanXlSQPey2JZ?usp=sharing
+https://colab.research.google.com/drive/1mLE8umVGFtM96mC_tIx7SZSDx-fnlDeb?authuser=4
 
 * Data Medication Recomendation
-https://drive.google.com/file/d/10xDsn-6QN7RsOLlRZ_t-lQ76DaL8ki4A/view?usp=share_link
+https://drive.google.com/file/d/10xDsn-6QN7RsOLlRZ_t-lQ76DaL8ki4A/view?usp=sharing
 
 
 ==========================

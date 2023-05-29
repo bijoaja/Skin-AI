@@ -2,5 +2,8 @@
 myenv
 .vscode
 
+skin-90
+modelResnet.py
+classNames.py
 resnet18.pth
 Rekomendasi Obat Penyakit pada Wajah.xlsx

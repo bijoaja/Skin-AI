@@ -2,10 +2,11 @@ from flask import Flask,render_template,request,jsonify
 import os
 from werkzeug.utils import secure_filename
 import torch
-import torchvision.transforms as transforms
+from torchvision import transforms
 from torch.autograd import Variable
 import torch.nn.functional as F
 from modelResnet import *
+from classNames import className
 import pandas as pd
 from PIL import Image
 import numpy as np
@@ -14,7 +15,8 @@ import shutil
 app = Flask(__name__, static_url_path='/static')
 
 ##### Model Resnet18 ####
-face_classes = ['Dermatitis perioral', 'Eksim', 'Pustula', 'acne nodules', 'blackhead', 'Flek hitam', 'folikulitis', 'fungal acne', 'herpes', 'kutil filiform', 'milia', 'panu', 'rosacea', 'whitehead']
+path = "skin-90/"
+face_classes = className(path)
 
 # Check if GPU is available
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -82,7 +84,6 @@ def home():
         },
     ]
     default_recom = medication("Normal / Not Detect")
-    print(default_recom)
     return render_template("index.html", memberData=member, default_recom=default_recom)
 
 # Proses image
@@ -160,10 +161,6 @@ def apiDeteksi():
         # Predict Image
         probs, classes = predict2(new_path, model)
         probsMax = max(probs)
-        
-        # Cek Akurasi dan class
-        for i in range(len(probs)):
-            print(face_classes[classes[i]],probs[i])
 
         if probsMax>0.85:
             faceClasses = face_classes[classes[probs.index(probsMax)]]

@@ -5,7 +5,7 @@ import torch
 from torchvision import transforms
 from torch.autograd import Variable
 import torch.nn.functional as F
-from modelResnet import *
+from modelResnet18 import *
 from classNames import className
 import pandas as pd
 from PIL import Image

@@ -55,7 +55,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link click-scroll" href="#section_3">Skincare Recommendation</a>
+                                <a class="nav-link click-scroll" href="#section_3">Facial Analysis</a>
                             </li>
 
                             <li class="nav-item">
@@ -164,7 +164,7 @@
                     <div class="row">
 
                         <div class="col-lg-12 col-12 text-center mx-auto mb-3">
-                            <h2><span>Skincare Analysis</span> & Recommendation</h2>
+                            <h2><span>Facial Analysis</span> & Skincare Recommendation</h2>
                         </div>
 
                         <div class="d-flex justify-content-center">
@@ -174,7 +174,7 @@
                                         <img src="../static/images/face_example.jpg" class="mb-4" alt="Contoh Foto" style="max-width: 8cm; border-radius: 10px;">
                                         
                                     </div>
-                                    <p class="text-center">Coba aplikasi untuk mengetahui produk skincare mana yang cocok untuk Anda</p>
+                                    <p class="text-center">Coba aplikasi untuk mengetahui permasalahan wajah dan produk skincare mana yang cocok untuk Anda</p>
                             
                                     <label for="inputImage" class="form-label">Upload Gambar</label>
                                     <input type="file" class="form-control" id="inputImage" accept="image/*">
@@ -196,15 +196,15 @@
                         </div>
 
                         <div class="col-lg-6 col-12 text-center">
-                        <h4 class="mb-4 pb-lg-2">Recommendation Produck</h4>
+                        <h4 class="mb-4 pb-lg-2">Recommendation Product</h4>
                         <div class="table-responsive">
                             <div class="table-container">
                                 <table class="table text-center">
                                     <thead>
                                         <tr>
-                                            <th style="width: 55%; font-size: 19px;">Medication</th>
-                                            <th style="width: 45%; font-size: 19px;">Skincare ingredients</th>
-                                            
+                                            <th style="width: 50%; font-size: 19px;">Medication</th>
+                                            <th style="width: 50%; font-size: 19px;">Skincare ingredients</th>
+                                            <th style="width: 25%; font-size: 19px;">Resources</th>
                                         </tr>
                                     </thead>
 
@@ -220,9 +220,17 @@
                                             </td>
                                             <td class="text-start">
                                                 <ul style="text-align: justify;">
-                                                    <!-- Membuat list untuk data medications -->
+                                                    <!-- Membuat list untuk data inggredients -->
                                                     {%for Inggredient in default_recom[0]['Skincare Ingredients']%}
                                                         <li>{{Inggredient}}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </td>
+                                            <td class="text-start">
+                                                <ul style="text-align: justify;">
+                                                    <!-- Membuat list untuk data medications -->
+                                                    {%for resource in default_recom[0]['Resources']%}
+                                                        <li><a href="{{ resource }}" target="_blank">{{default_recom[0]['Domain'][loop.index0]}}</a></li>
                                                     {% endfor %}
                                                 </ul>
                                             </td>

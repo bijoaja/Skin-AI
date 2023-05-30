@@ -14,7 +14,8 @@
 - transforms  0.1
 - Pillow      9.5.0
 - openpyxl    3.1.2
-- shutils 0.1.0
+- urllib3     2.0.2
+- shutils     0.1.0
 - ssl
 
 =======================================
@@ -35,7 +36,8 @@
 12. pip install Pillow==9.5.0
 13. pip install openpyxl==3.1.2
 14. pip install shutils==0.1.0
-15. python -m pip install certifi
+15. pip install urllib3==2.0.2
+16. python -m pip install certifi
 
 ==============================
 ## [Model of Face Analysis and]

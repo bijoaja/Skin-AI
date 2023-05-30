@@ -11,6 +11,7 @@ import pandas as pd
 from PIL import Image
 import numpy as np
 import shutil
+from urllib.parse import urlparse
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -135,6 +136,8 @@ def medication(skin_condition):
     data_recomm = df_pd[df_pd["Skin Condition"].apply(lambda x: x.lower()) == skin_condition.lower()]
     data_recomm["Medication"] = data_recomm["Medication"].apply(lambda x: x.split('\n'))
     data_recomm["Skincare Ingredients"] = data_recomm["Skincare Ingredients"].apply(lambda x: x.split('\n'))
+    data_recomm["Resources"] = data_recomm["Resources"].apply(lambda x: x.split('\n'))
+    data_recomm["Domain"] = data_recomm["Resources"].apply(lambda x: [urlparse(url).netloc for url in x])
     return data_recomm.to_dict(orient='records')
 
 # [Routing untuk API Face Analysis]	
@@ -171,6 +174,7 @@ def apiDeteksi():
     else:
         faceClasses = "Upload jpeg file"
     data_recomm = medication(faceClasses)
+    print(data_recomm)
 
     # Return hasil prediksi dengan format JSON
     return jsonify({

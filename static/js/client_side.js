@@ -99,6 +99,12 @@ $(document).ready(function(){
       return '<li>' + ingredient + '</li>';
     });
     var listIngr = ingredients.join('')
+
+    // Membuat list untuk data resources
+    var resources = data_recom[0]["Domain"].map(function(resource, index) {
+      return '<li><a href="'+ data_recom[0]["Resources"][index] +'" target="_blank">' + resource + '</a></li>';
+    });
+    var listRes = resources.join('')
     
     if(data_recom == "(none)") {
       str +=  '<td class="text-start" style="border-right: 2px solid #3D405B;">'
@@ -130,6 +136,11 @@ $(document).ready(function(){
       str +=  '<td class="text-start">'
       str +=  '<ul style="text-align: justify;">'
       str +=  listIngr
+      str +=  '</ul>'
+      str +=  '</td>'
+      str +=  '<td class="text-start">'
+      str +=  '<ul style="text-align: justify;">'
+      str +=  listRes
       str +=  '</ul>'
       str +=  '</td>'
     }

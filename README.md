@@ -58,10 +58,13 @@ https://drive.google.com/file/d/10xDsn-6QN7RsOLlRZ_t-lQ76DaL8ki4A/view?usp=shari
 ## [Tutorial Run Application]
 ==========================
 
-## 1. git clone https://github.com/bijoaja/template-FP.git
+### 1. git clone https://github.com/bijoaja/template-FP.git
+    cd template-FP
 
-## 2. Copy Environment & Packages Installation to your terminal then `Enter`
-    
+### 2. Copy Environment & Packages Installation to your terminal then `Enter`
+    pip install virtualenv
+    virtualenv skin_app
+    source skin_app/scripts/activate
     pip install Flask==2.3.2
     pip install Werkzeug==2.3.4
     pip install joblib==1.2.0
@@ -76,11 +79,12 @@ https://drive.google.com/file/d/10xDsn-6QN7RsOLlRZ_t-lQ76DaL8ki4A/view?usp=shari
     pip install urllib3==2.0.2
     python -m pip install certifi
 
-## 3. Download model_resnet18.pth and Dataset Recomendation Skincare to your directory
+### 3. Download model_resnet18.pth and Dataset Recomendation Skincare to your directory
 
-## 4. You can run App in terminal with code on virtualenv when you activate
+### 4. You can run App in terminal with code on virtualenv when you activate
     python skinApp.py
 
-## 5. You can close App in terminal with code `ctrl+c` then run in terminal `deactivate` to out virtualenv
+### 5. You can close App in terminal with key `ctrl+c` then run in terminal to out virtualenv
+    deactivate
 
 

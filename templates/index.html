@@ -187,7 +187,7 @@
                             
                         </div> 
 
-                        <div class="col-lg-6 col-12  text-center">
+                        <div class="col-lg-4 col-12  text-center">
                             <h4 class="mb-4 pb-lg-2">Face Detection</h4>
                             <div id="outputAreaFace" class="box mx-auto">
                                 <p>Your Problem: <b>Normal / Not Detect</b> </p>
@@ -195,15 +195,15 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-6 col-12 text-center">
+                        <div class="col-lg-8 col-12 text-center">
                         <h4 class="mb-4 pb-lg-2">Recommendation Product</h4>
                         <div class="table-responsive">
                             <div class="table-container">
                                 <table class="table text-center">
                                     <thead>
                                         <tr>
-                                            <th style="width: 50%; font-size: 19px;">Medication</th>
-                                            <th style="width: 50%; font-size: 19px;">Skincare ingredients</th>
+                                            <th style="width: 40%; font-size: 19px;">Medication</th>
+                                            <th style="width: 35%; font-size: 19px;">Skincare ingredients</th>
                                             <th style="width: 25%; font-size: 19px;">Resources</th>
                                         </tr>
                                     </thead>
@@ -218,7 +218,7 @@
                                                     {% endfor %}
                                                 </ul>
                                             </td>
-                                            <td class="text-start">
+                                            <td class="text-start" style="border-right: 2px solid #3D405B;">
                                                 <ul style="text-align: justify;">
                                                     <!-- Membuat list untuk data inggredients -->
                                                     {%for Inggredient in default_recom[0]['Skincare Ingredients']%}
@@ -228,14 +228,13 @@
                                             </td>
                                             <td class="text-start">
                                                 <ul style="text-align: justify;">
-                                                    <!-- Membuat list untuk data medications -->
+                                                    <!-- Membuat list untuk data Resources -->
                                                     {%for resource in default_recom[0]['Resources']%}
-                                                        <li><a href="{{ resource }}" target="_blank">{{default_recom[0]['Domain'][loop.index0]}}</a></li>
+                                                        <li><a href="{{ resource }}" target="_blank" style="word-wrap: break-word;">{{default_recom[0]['Domain'][loop.index0]}}</a></li>
                                                     {% endfor %}
                                                 </ul>
                                             </td>
                                         </tr>
-                                                                    
                                     </tbody>
                                 </table>
                             </div>

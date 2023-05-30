@@ -3,19 +3,19 @@
 =================
 ## [Packages List]
 =================
-- Python      3.11.3
-- Flask       2.3.2
-- Werkzeug    2.3.4
-- joblib      1.2.0
-- pandas      2.0.1
-- numpy       1.24.3
-- torch       2.0.1
-- torchvision 0.15.2
-- transforms  0.1
-- Pillow      9.5.0
-- openpyxl    3.1.2
-- urllib3     2.0.2
-- shutils     0.1.0
+- Python         3.11.3
+- Flask          2.3.2
+- Werkzeug       2.3.4
+- joblib         1.2.0
+- pandas         2.0.1
+- numpy          1.24.3
+- torch          2.0.1
+- torchvision    0.15.2
+- transforms     0.1
+- Pillow         9.5.0
+- openpyxl       3.1.2
+- urllib3        2.0.2
+- shutils        0.1.0
 - ssl
 
 =======================================
@@ -44,11 +44,11 @@
 ## [Skincare Recommendation]
 ==============================
 
-* model_resnet18.pth
+* model resnet18.pth
 https://drive.google.com/file/d/1NxYgedIVIrrWW2UtqR03tECHyNYnXL0S/view?usp=drive_link
 
 * Modelling of Face Analysis
-https://colab.research.google.com/drive/1mLE8umVGFtM96mC_tIx7SZSDx-fnlDeb?authuser=4
+https://drive.google.com/file/d/1mLE8umVGFtM96mC_tIx7SZSDx-fnlDeb/view?usp=sharing
 
 * Data Medication Recomendation
 https://drive.google.com/file/d/10xDsn-6QN7RsOLlRZ_t-lQ76DaL8ki4A/view?usp=sharing

@@ -3,8 +3,10 @@ myenv
 .vscode
 
 skin-90
+skin-90.zip
 modelResnet18.py
 classNames.py
 resnet18.pth
 best_model1.pth
+best_model2.pth
 Rekomendasi Obat Penyakit pada Wajah.xlsx

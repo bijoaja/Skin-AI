@@ -133,7 +133,7 @@ $(document).ready(function(){
       str +=  listMed
       str +=  '</ul>'
       str +=  '</td>'
-      str +=  '<td class="text-start">'
+      str +=  '<td class="text-start" style="border-right: 2px solid #3D405B;">'
       str +=  '<ul style="text-align: justify;">'
       str +=  listIngr
       str +=  '</ul>'

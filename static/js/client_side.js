@@ -74,7 +74,7 @@ $(document).ready(function(){
     }
     else if(data_prediksi == "Normal / Not Detect"){
       str += "<p><b>"+ data_prediksi +"</b></p>";
-      str += "<p>Diagnosis: <b>"+ data_diagnosis +"</b></p>";
+      str += "<p>Hipotesis: <b>"+ data_diagnosis +"</b></p>";
       str += "<p>Accuration: <b>"+ data_akurasi +"</b></p>";
       str += "<img src='" + image_prediksi + "'width=\"300\" height=\"300\" alt='Gambar Produk'>";
     }

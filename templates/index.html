@@ -9,7 +9,7 @@
 
         <title>Skin Quality Analysis - Good Vibes Mood</title>
       
-        <link rel="shortcut icon" href="../static/images/logo.jpg" type="image/x-icon">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo.jpg') }}" type="image/x-icon">
 
         <!-- CSS FILES -->                
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,12 +17,12 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
         <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+        
+        <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+        
+        <link href="{{ url_for('static', filename='css/bootstrap-icons.css') }}" rel="stylesheet">
 
-        <link href="../static/css/bootstrap.min.css" rel="stylesheet">
-
-        <link href="../static/css/bootstrap-icons.css" rel="stylesheet">
-
-        <link href="../static/css/templatemo-tiya-golf-club.css" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/templatemo-tiya-golf-club.css') }}" rel="stylesheet">
         
     </head>
     
@@ -33,7 +33,7 @@
             <nav class="navbar navbar-expand-lg">                
                 <div class="container">
                     <a class="navbar-brand d-flex align-items-center" href="index.html">
-                        <img src="../static/images/logoNoBg.png" style="height: 80px;" alt="Tiya Golf Club">
+                        <img src="{{ url_for('static', filename='images/logoNoBg.png') }}" style="height: 80px;" alt="Tiya Golf Club">
                         <span class="navbar-brand-text">
                             G V M 
                             <small>Good Vibes Mood</small>
@@ -55,7 +55,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link click-scroll" href="#section_3">Facial Analysis</a>
+                                <a class="nav-link click-scroll" href="#section_3">SkinAI</a>
                             </li>
 
                             <li class="nav-item">
@@ -97,7 +97,7 @@
 
                         <div class="col-lg-6 col-12">
                             <div class="ratio ratio-16x9">
-                                <img width="560" height="315" src="../static/images/pict1.png" title="wajah" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allow fullscreen>
+                                <img width="560" height="315" src="{{ url_for('static', filename='images/pict2.png') }}" title="wajah" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allow fullscreen>
                             </div>
                         </div>
 
@@ -171,7 +171,7 @@
                             <form>
                                 <div class="mb-3">
                                     <div class="d-flex justify-content-center">
-                                        <img src="../static/images/face_example.jpg" class="mb-4" alt="Contoh Foto" style="max-width: 8cm; border-radius: 10px;">
+                                        <img src="{{ url_for('static', filename='images/face_example.jpg') }}" class="mb-4" alt="Contoh Foto" style="max-width: 8cm; border-radius: 10px;">
                                         
                                     </div>
                                     <p class="text-center">Coba aplikasi untuk mengetahui permasalahan wajah dan produk skincare mana yang cocok untuk Anda</p>
@@ -326,13 +326,13 @@
 
 
         <!-- JAVASCRIPT FILES -->
-        <script src="../static/js/jquery.min.js"></script>
-        <script src="../static/js/bootstrap.bundle.min.js"></script>
-        <script src="../static/js/jquery.sticky.js"></script>
-        <script src="../static/js/click-scroll.js"></script>
-        <script src="../static/js/animated-headline.js"></script>
-        <script src="../static/js/modernizr.js"></script>
-        <script src="../static/js/custom.js"></script>
+        <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jquery.sticky.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/click-scroll.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/animated-headline.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/modernizr.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
         <!-- JavaScript untuk Animasi Scroll dan Prediksi Model -->
         <script src="{{ url_for('static', filename='/js/client_side.js' ) }}"></script>
 

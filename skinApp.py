@@ -188,10 +188,10 @@ def apiDeteksi():
 if __name__ == '__main__':
     # Load model yang telah ditraining
     try:
-        model.load_state_dict(torch.load('best_model2.pth'))
+        model.load_state_dict(torch.load('model.pth'))
     except RuntimeError as error:
         if 'Attempting to deserialize object on a CUDA device but torch.cuda.is_available() is False' in str(error):
-            model.load_state_dict(torch.load('best_model2.pth', map_location=torch.device('cpu')))
+            model.load_state_dict(torch.load('model.pth', map_location=torch.device('cpu')))
         else:
             raise error
 

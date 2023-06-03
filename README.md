@@ -58,8 +58,8 @@ https://drive.google.com/file/d/10xDsn-6QN7RsOLlRZ_t-lQ76DaL8ki4A/view?usp=shari
 ## [Tutorial Run Application]
 ==========================
 
-### 1. git clone https://github.com/bijoaja/template-FP.git
-    cd template-FP
+### 1. git clone https://github.com/bijoaja/Skin-AI.git
+    cd Skin-AI
 
 ### 2. Copy Environment & Packages Installation to your terminal then `Enter`
     pip install virtualenv

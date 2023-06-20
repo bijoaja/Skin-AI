@@ -1,4 +1,5 @@
 from flask import Flask,render_template,request,jsonify
+from flask_cors import CORS
 import os
 from werkzeug.utils import secure_filename
 import torch
@@ -14,7 +15,7 @@ import shutil
 from urllib.parse import urlparse
 
 app = Flask(__name__, static_url_path='/static')
-
+CORS(app)
 ##### Model Resnet18 ####
 path = "skin-90/"
 face_classes = className(path)
@@ -85,7 +86,11 @@ def home():
         },
     ]
     default_recom = medication("Normal / Not Detect")
-    return render_template("index.html", memberData=member, default_recom=default_recom)
+    return jsonify({
+        "member":member,
+        "recom": default_recom
+    })
+    # return render_template("index.html", memberData=member, default_recom=default_recom)
 
 # Proses image
 def process_image(image):
@@ -175,14 +180,16 @@ def apiDeteksi():
         faceClasses = "Upload jpeg file"
     data_recomm = medication(faceClasses)
 
-    # Return hasil prediksi dengan format JSON
-    return jsonify({
+    results = {
         "prediksi": faceClasses,
         "diagnosis": diagnosis,
         "akurasi": akurasi,
         "gambar_prediksi" : new_path,
         "data_rekomendasi": data_recomm
-    })
+    }
+    print(results)
+    # Return hasil prediksi dengan format JSON
+    return jsonify(results)
 
 
 if __name__ == '__main__':

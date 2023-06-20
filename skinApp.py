@@ -86,11 +86,7 @@ def home():
         },
     ]
     default_recom = medication("Normal / Not Detect")
-    return jsonify({
-        "member":member,
-        "recom": default_recom
-    })
-    # return render_template("index.html", memberData=member, default_recom=default_recom)
+    return render_template("index.html", memberData=member, default_recom=default_recom)
 
 # Proses image
 def process_image(image):

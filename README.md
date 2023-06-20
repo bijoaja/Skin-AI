@@ -61,23 +61,19 @@ https://drive.google.com/file/d/10xDsn-6QN7RsOLlRZ_t-lQ76DaL8ki4A/view?usp=shari
 ### 1. git clone https://github.com/bijoaja/Skin-AI.git
     cd Skin-AI
 
-### 2. Copy Environment & Packages Installation to your terminal then `Enter`
-    pip install virtualenv
-    virtualenv skin_app
-    source skin_app/scripts/activate
-    pip install Flask==2.3.2
-    pip install Werkzeug==2.3.4
-    pip install joblib==1.2.0
-    pip install pandas==2.0.1
-    pip install numpy==1.24.3
-    pip install torch==2.0.1
-    pip install torchvision==0.15.2
-    pip install transforms==0.1
-    pip install Pillow==9.5.0
-    pip install openpyxl==3.1.2
-    pip install shutils==0.1.0
-    pip install urllib3==2.0.2
-    python -m pip install certifi
+### 2. Activate virtual env & Packages Installation to your terminal then `Enter`
+* ### using Windows
+        
+        pip install virtualenv
+        virtualenv skin_app
+        source skin_app/scripts/activate
+        pip install -r requirements.txt
+* ### using Linux
+        
+        pip install virtualenv
+        virtualenv skin_app
+        source skin_app/bin/activate
+        pip install -r requirements.txt
 
 ### 3. Download model_resnet18.pth and Dataset Recomendation Skincare to your directory
 
